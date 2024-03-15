@@ -226,7 +226,7 @@ class bikes : public vehicles{
 
 };
 
-int main(){
+/*int main() {
     //testing
     cars a;
     a.read_file();
@@ -247,4 +247,4 @@ int main(){
     //a.display_by_model("Alto");
 
     a.display_by_year(2021);
-}
+}*/
