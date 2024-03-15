@@ -1,4 +1,5 @@
 #include "inventory.h.cpp"
+extern double wallet;
 
 class Tools : public Inventory {
 protected:
@@ -8,6 +9,10 @@ public:
 	Tools(string toolName, int quantity, double price) : Inventory(quantity, price), toolName(toolName) {}
 
 	void buy(int amount) override {
+		if (amount * price > (wallet)) {
+			cout << "Insufficient balance!\n";
+			return;
+		}
 		quantity += amount;
 		/* Some code to reduce account balance when it is implemented*/
 	}
@@ -18,6 +23,7 @@ public:
 			return;
 		}
 		quantity -= amount;
+		wallet += amount * price;
 		cout << "Transaction complete\n";
 		/* some code to charge the customer and increase the dealership account balance */
 	}

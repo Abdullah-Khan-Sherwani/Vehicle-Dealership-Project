@@ -5,6 +5,7 @@
 #include<iomanip>
 #include "Accounts14,3.h.cpp"
 using namespace std;
+double wallet = 100000;
 
 int main() {
     vector<Account*> accounts;
