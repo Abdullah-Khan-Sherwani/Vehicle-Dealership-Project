@@ -33,7 +33,6 @@ int main() {
         }
     } while (choice != 3);
 
-    // Clean up dynamically allocated memory
     for (Account* acc : accounts) {
         delete acc;
     }
