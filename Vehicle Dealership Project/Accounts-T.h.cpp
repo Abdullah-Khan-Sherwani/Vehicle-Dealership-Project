@@ -1,4 +1,4 @@
-/*#include<iostream>
+#include<iostream>
 #include<cstdlib>
 #include<string>
 #include<vector>
@@ -7,6 +7,9 @@ using namespace std;
 
 class Account {
 protected:
+	enum AccountType { CUSTOMER, EMPLOYEE };
+	AccountType type;
+
 	Account(string mail, string password, string name) : mail(mail), password(password), name(name) {}
 
 public:
@@ -14,6 +17,8 @@ public:
 	vector<string> logbook;
 
 public:
+
+virtual void signupInstance()=0; //pure virtual function for overridiing in derived classes
 
 	/*void setmail() {
 		cout << "Enter Email: ";
@@ -54,6 +59,7 @@ public:
 
 		return Account(mail, password, name);
 	}
+	virtual void signupInstance()=0; //pure virtual function for overridiing in derived classes
 
 	static Account* signup() {
 		string mail, password, name;
@@ -97,5 +103,5 @@ public:
 		}
 		cout << "\nIncorrect Details!\n";
 		return nullptr;
-	}
-};*/
+	}*/
+};

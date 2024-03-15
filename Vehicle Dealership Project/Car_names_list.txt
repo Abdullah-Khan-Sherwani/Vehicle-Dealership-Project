@@ -1,0 +1,57 @@
+Toyota Corolla Gli 2018 BDY-888 1300cc 12km/l 3500000
+Suzuki Alto AGS 2023 BYX-365 660cc 18km/l 2940000
+Toyota Yaris Cvti 2021 BTN-834 1300cc 10km/l 3800000
+Honda Civic Cvt 2021 BRN-376 1800cc 12km/l 3600000
+Suzuki Cultus Vxr 2020 BNM-572 1000cc 15km/l 2000000
+Suzuki Swift Vxl 2023 BPP-401 1300cc 14km/l 4000000
+Honda City Cvt 2024 BXA-102 1500cc 16km/l 4500000
+Kia Sportage AWD 2021 ASY-381 2000cc 8km/l 6500000
+Hyundai Tucson 
+Toyota Fortuner
+Toyota Land-Cruiser
+Toyota Prado
+Nissan Dayz
+Suzuki Wagon-R
+Suzuki Mehran
+Daihatsu Charade
+Suzuki Fx
+Toyota Wish
+Toyota Vitz
+Toyota Hilux
+Seres 3 EV 2024 CAA-999 electric 34km/l 8400000
+MG HS
+MG ZS EV 2024 CBA-978 electric 30km/l 13000000
+Lexus LX-570
+Hyundai Sonata
+Hyundai Elantra
+Kia Picanto
+Kia Sorento
+Kia Carnival
+Suzuki Bolan
+Daihatsu Coure
+Daihatsu Mira
+Honda Vezel
+Toyota Prius
+Toyota Fielder
+Audi E-tron
+Audi A-3
+Audi A-4
+Audi A-5
+Audi A-6
+Toyota Tundra
+Toyota Premio
+Peugeot 2008
+Honda BR-V
+Changan Alsvin
+Toyota Belta
+Toyota Aqua
+Toyota C-HR
+Honda Accord
+Toyota Mark-X
+DFSK Glory-580
+Haval H6
+
+
+
+
+
