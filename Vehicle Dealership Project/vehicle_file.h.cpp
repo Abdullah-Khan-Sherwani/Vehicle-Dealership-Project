@@ -331,7 +331,7 @@ class bikes : public vehicles{
 
 };
 
-int main(){
+/*int main(){
     //testing
     cars a;
     a.read_file();
@@ -361,4 +361,4 @@ int main(){
     //a.display_total_number_of_cars();
 
     a.edit_car_details("BYX-365");
-}
+}*/
