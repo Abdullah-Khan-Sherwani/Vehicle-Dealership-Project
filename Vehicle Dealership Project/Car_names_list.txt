@@ -5,13 +5,13 @@ Honda Civic Cvt 2021 BRN-376 1800cc 12km/l 3600000
 Suzuki Cultus Vxr 2020 BNM-572 1000cc 15km/l 2000000
 Suzuki Swift Vxl 2023 BPP-401 1300cc 14km/l 4000000
 Honda City Cvt 2024 BXA-102 1500cc 16km/l 4500000
-Kia Sportage AWD 2021 ASY-381 2000cc 8km/l 6500000
-Hyundai Tucson 
-Toyota Fortuner
-Toyota Land-Cruiser
-Toyota Prado
-Nissan Dayz
-Suzuki Wagon-R
+Kia Sportage AWD 2021 BJ-3811 2000cc 8km/l 6500000
+Hyundai Tucson GLS 2022 BJ-8765 2000cc 12km/l 7400000
+Toyota Fortuner VVT-i 2018 BG-8314 2700cc 7km/l 11500000
+Toyota Land-Cruiser ZX 2021 BK-1276 3500cc 8km/l 73000000
+Toyota Prado TX-L 2018 BG-9786 2700cc 6km/l 30500000
+Nissan Dayz X 2023 BVV-504 660cc 16km/l 4295000
+Suzuki Wagon-R 
 Suzuki Mehran
 Daihatsu Charade
 Suzuki Fx
@@ -50,8 +50,3 @@ Honda Accord
 Toyota Mark-X
 DFSK Glory-580
 Haval H6
-
-
-
-
-
