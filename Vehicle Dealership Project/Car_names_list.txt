@@ -13,7 +13,7 @@ Toyota Prado TX-L 2018 BG-9786 2700cc 6km/l 30500000
 Nissan Dayz X 2023 BVV-504 660cc 16km/l 4295000
 Suzuki Wagon-R VXL 2016 BDC-708 1000cc 15km/l 1800000
 Suzuki Mehran VX 2007 ABC-750 800cc 13km/l 750000
-Daihatsu Charade CX 1986 J-7891 1000cc 12km/l 215000
+Daihatsu Charade CX 1986 S-1362 1000cc 12km/l 215000
 Suzuki Fx VX 1988 K-1576 700cc 13km/l 180000
 Toyota Wish X 2007 AWL-241 1800cc 12km/l 3000000
 Toyota Vitz F 2014 AXY-924 1000cc 14km/l 2700000
