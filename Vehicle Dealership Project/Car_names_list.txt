@@ -21,32 +21,32 @@ Toyota Hilux G 2013 AZZ-503 3000cc 6km/l 6625000
 Seres 3 EV 2024 CAA-999 electric 34km/l 8400000
 MG HS Trophy 2021 BHY-673 1500cc 13km/l 6450000
 MG ZS EV 2024 CBA-978 electric 30km/l 13000000
-Lexus LX-570
-Hyundai Sonata
-Hyundai Elantra
-Kia Picanto
-Kia Sorento
-Kia Carnival
-Suzuki Bolan
-Daihatsu Coure
-Daihatsu Mira
-Honda Vezel
-Toyota Prius
-Toyota Fielder
-Audi E-tron
-Audi A-3
-Audi A-4
-Audi A-5
-Audi A-6
-Toyota Tundra
-Toyota Premio
-Peugeot 2008
-Honda BR-V
-Changan Alsvin
-Toyota Belta
-Toyota Aqua
-Toyota C-HR
-Honda Accord
-Toyota Mark-X
-DFSK Glory-580
-Haval H6
+Lexus LX-570 LX 2021 BH-6549 5700cc 7km/l 93000000
+Hyundai Sonata 2.5 2023 BXG-403 2500cc 12km/l 11200000
+Hyundai Elantra GL 2023 BWW-899 1600cc 13km/l 6400000
+Kia Picanto AT 2021 BUY-001 1000cc 10km/l 3100000
+Kia Sorento FWD 2021 BH-7866 3500cc 11km/l 8600000
+Kia Carnival Executive 2022 BI-1258 3500cc 9km/l 12000000
+Suzuki Bolan VX 2019 BMW-874 800cc 12km/l 1675000
+Daihatsu Coure CX 2009 ARR-988 800cc 14km/l 1250000
+Daihatsu Mira X 2006 AHG-176 660cc 16km/l 1390000
+Honda Vezel Z 2019 BG-4503 1500cc 20km/l 8475000
+Toyota Prius S 2012 AWJ-846 1800cc 23km/l 4500000
+Toyota Fielder X-G 2020 BPE-946 1500cc 19km/l 6975000
+Audi E-tron 50-Quattro 2022 BK-9808 electric 22km/l 30500000
+Audi A-3 TFSI 2017 BEF-304 1200cc 12km/l 8300000
+Audi A-4 S-Line 2016 BCC-112 2000cc 10km/l 12000000
+Audi A-5 Sportback 2018 BGJ-756 1400cc 11km/l 15200000
+Audi A-6 Business 2018 BHJ-498 1800cc 9km/l 18000000
+Toyota Tundra 5.7i 2014 BF-8745 5700cc 5km/l 16500000
+Toyota Premio X 2011 ARG-457 1800cc 13km/l 5500000
+Peugeot 2008 Allure 2023 BVU-274 1200cc 15km/l 7350000
+Honda BR-V S 2021 BH-9045 1500cc 12km/l 4800000
+Changan Alsvin DCT 2021 BTE-834 1500cc 13km/l 3500000
+Toyota Belta X 2007 AVR-576 1300cc 14km/l 2450000
+Toyota Aqua S 2020 BPR-105 1500cc 24km/l 6250000
+Toyota C-HR G-LED 2018 BGH-156 1800cc 17km/l 8400000
+Honda Accord S 2008 AKL-720 2400cc 10km/l 6500000
+Toyota Mark-X 300G 2004 ADC-264 3000cc 8km/l 6750000
+DFSK Glory-580 Pro 2022 BJ-3876 1500cc 13km/l 5720000
+Haval H6 HEV 2024 BK-1736 1500cc 18km/l 12600000
