@@ -16,10 +16,10 @@ Suzuki Mehran VX 2007 ABC-750 800cc 13km/l 750000
 Daihatsu Charade CX 1986 J-7891 1000cc 12km/l 215000
 Suzuki Fx VX 1988 K-1576 700cc 13km/l 180000
 Toyota Wish X 2007 AWL-241 1800cc 12km/l 3000000
-Toyota Vitz
-Toyota Hilux
+Toyota Vitz F 2014 AXY-924 1000cc 14km/l 2700000
+Toyota Hilux G 2013 AZZ-503 3000cc 6km/l 6625000
 Seres 3 EV 2024 CAA-999 electric 34km/l 8400000
-MG HS
+MG HS Trophy 2021 BHY-673 1500cc 13km/l 6450000
 MG ZS EV 2024 CBA-978 electric 30km/l 13000000
 Lexus LX-570
 Hyundai Sonata
