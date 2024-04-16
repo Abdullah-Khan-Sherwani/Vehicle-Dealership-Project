@@ -4,7 +4,7 @@
 #include<vector>
 #include<string>
 using namespace std;
-string path = "Car_names_list.txt";
+string path = "/Users/hamza/IBA Stuff/C++/OOP/Xcode/28th_march/Project/Car_names_list.txt";
 
 class inventory{
 
