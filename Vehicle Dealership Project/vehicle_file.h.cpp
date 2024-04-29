@@ -4,6 +4,7 @@
 #include<vector>
 #include<string>
 using namespace std;
+
 string c_path = "Car_names_list.txt";
 string b_path = "Bikes_names_list.txt";
 
@@ -111,7 +112,7 @@ class vehicles : public inventory{
             cout<< "\nMake|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
             cout<< list[index] << endl << "------------------------------------------------------------\n";
         } else{
-            cout<<"\nThere is no car by that number plate in our inventory\n";
+            cout<<"\nThere is no vehicle by that number plate in our inventory\n";
         }
     }
 
@@ -142,7 +143,7 @@ class vehicles : public inventory{
             }
         }
         if(!found){
-            cout<<"\nThere is no car by that make in our inventory\n";
+            cout<<"\nThere is no vehicle by that make in our inventory\n";
         }
     }
 
@@ -173,7 +174,7 @@ class vehicles : public inventory{
             }
         }
         if(!found){
-            cout<<"\nThere is no car with that model name in our inventory\n";
+            cout<<"\nThere is no vehicle with that model name in our inventory\n";
         }
     }
 
@@ -204,7 +205,7 @@ class vehicles : public inventory{
             }
         }
         if(!found){
-            cout<<"\nThere is no car with that model name in our inventory\n";
+            cout<<"\nThere is no vehicle with that model name in our inventory\n";
         }
     }
 
@@ -235,7 +236,7 @@ class vehicles : public inventory{
             }
         }
         if(!found){
-            cout<<"\nThere is no car within that price range in our inventory\n";
+            cout<<"\nThere is no vehicle within that price range in our inventory\n";
         }
     }
 
@@ -267,7 +268,7 @@ class vehicles : public inventory{
             list.erase(list.begin() + index);
             quantity -= 1;
         } else{
-            cout<<"There is no car by that number plate\n";
+            cout<<"There is no vehicle by that number plate\n";
         }
     }
 
@@ -282,7 +283,7 @@ class vehicles : public inventory{
 
     //Function to display the total number of vehicles (bikes and cars seperate) in inventory
     void display_total_number_of_vehicles(){
-        cout<<"The total number of cars in our inventory are " << quantity << endl;
+        cout<<"The total number of vehicles in our inventory are " << quantity << endl;
     }
 
     //Function for editing a vehicle's details in list vector and .txt file
@@ -398,5 +399,9 @@ int main(){
     //b.display_total_number_of_vehicles();
 
     //b.display_vehicle("IAT-1947");
+
+    //b.display_within_price_range(500000, 2000000);
+
+    //b.display_by_make("Harley-Davidson");
 }
 */
