@@ -4,7 +4,8 @@
 #include<vector>
 #include<string>
 using namespace std;
-string path = "/Users/hamza/IBA Stuff/C++/OOP/Xcode/28th_march/Project/Car_names_list.txt";
+string c_path = "Car_names_list.txt";
+string b_path = "Bikes_names_list.txt";
 
 class inventory{
 
@@ -15,20 +16,16 @@ class tool : public inventory{
 };
 
 class vehicles : public inventory{
-
-};
-
-class cars : public vehicles{
-    ifstream file;
-    int number_of_cars;
-    vector<string> car_list;
-
     public:
-    cars() : file(path), number_of_cars(0) {}
+
+    string loaded_path;
+    int quantity;
+    vector<string> list;
+    vehicles() : quantity(0) {}
 
     //Function to delete empty lines in .txt file
-    void DeleteEmptyLines(){
-        ifstream in(path);
+    void DeleteEmptyLines(string location){
+        ifstream in(location);
         string line, text;
         while(getline(in, line)){
             if(!(line.empty() || line.find_first_not_of(' ') == string::npos)){
@@ -36,29 +33,29 @@ class cars : public vehicles{
             }
         }
         in.close();
-        ofstream out(path);
+        ofstream out(location);
         out << text;
         out.close();
     }
 
     //Reading from .txt file
-    void read_file(){
-        DeleteEmptyLines();
+    void read_file(string path){
+        loaded_path = path;
+        DeleteEmptyLines(path);
 
-        number_of_cars = 0;
         ifstream in(path);
         string line;
         while(getline(in, line)){
             if(!line.empty()) {
-                ++number_of_cars;
+                ++quantity;
             }
         }
         in.close();
 
-        car_list.resize(number_of_cars);
+        list.resize(quantity);
         in.open(path);
-        for(int i = 0; i < number_of_cars; i++){
-            if(getline(in, car_list[i])){
+        for(int i = 0; i < quantity; i++){
+            if(getline(in, list[i])){
             } else{
                 break;
             }
@@ -66,22 +63,22 @@ class cars : public vehicles{
         in.close();
     }
 
-    //Function to add car to .txt file and to car_list vector
-    void add_car(string make, string model, string variant, int year, string number_plate, string engine, string mileage, int price){
+    //Function to add vehicle to .txt file and to list vector
+    void add_vehicle(string make, string model, string variant, int year, string number_plate, string engine, string mileage, int price){
         ofstream out;
-        out.open(path, ios::app);
-        number_of_cars += 1;
+        out.open(loaded_path, ios::app);
+        quantity += 1;
         string new_car = make + " " + model + " " + variant + " " + to_string(year) + " " + number_plate + " " + engine + " " + mileage + " " + to_string(price);
-        car_list.push_back(new_car);
-        out<< new_car;
+        list.push_back(new_car);
+        out<< new_car;   
     }
 
-    //Function for searching a car by plate in car_list vector
-    int search_car(string number_plate){
+    //Function for searching a vehicle by plate in list vector
+    int search_vehicle(string number_plate){
         bool found = false;
 
-        for(int i = 0; i < number_of_cars; i++){
-            string details = car_list[i];
+        for(int i = 0; i < quantity; i++){
+            string details = list[i];
             int column = 0;
             string plate = "";
             int k = 0;
@@ -110,23 +107,23 @@ class cars : public vehicles{
     }
 
     //Function to display car in terminal by plate
-    void display_car(string number_plate){
-        int index = search_car(number_plate);
+    void display_vehicle(string number_plate){
+        int index = search_vehicle(number_plate);
         if(index != -1){
             cout<<"\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
             cout<< "\nMake|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
-            cout<< car_list[index] << endl << "------------------------------------------------------------\n";
+            cout<< list[index] << endl << "------------------------------------------------------------\n";
         }
     }
 
-    //Function to display car in terminal by make
+    //Function to display vehicle in terminal by make
     void display_by_make(string make){
         bool found = false;
         cout<<"\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
         cout<<"\nMake|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
 
-        for(int i = 0; i < number_of_cars; i++){
-            string details = car_list[i];
+        for(int i = 0; i < quantity; i++){
+            string details = list[i];
             int column = 0;
             string company = "";
 
@@ -142,7 +139,7 @@ class cars : public vehicles{
             }
             if(make == company){
                 found = true;
-                cout<< car_list[i] << endl << "------------------------------------------------------------\n";
+                cout<< list[i] << endl << "------------------------------------------------------------\n";
             }
         }
         if(!found){
@@ -150,14 +147,14 @@ class cars : public vehicles{
         }
     }
 
-    //Function to display car in terminal by model
+    //Function to display vehicle in terminal by model
     void display_by_model(string model){
         bool found = false;
         cout<<"\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
         cout<<"\nMake|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
 
-        for(int i = 0; i < number_of_cars; i++){
-            string details = car_list[i];
+        for(int i = 0; i < quantity; i++){
+            string details = list[i];
             int column = 0;
             string name = "";
 
@@ -173,22 +170,22 @@ class cars : public vehicles{
             
             if(name == model){
                 found = true;
-                cout<< car_list[i] << endl << "------------------------------------------------------------\n";
+                cout<< list[i] << endl << "------------------------------------------------------------\n";
             }
         }
         if(!found){
-            cout<<"\nThere is no car with that model name in our inventory";
+            cout<<"\nThere is no car with that model name in our inventory\n";
         }
     }
 
-    //Function to display car in terminal by year
+    //Function to display vehicle in terminal by year
     void display_by_year(int year){
         bool found = false;
         cout<<"\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
         cout<<"\nMake|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
 
-        for(int i = 0; i < number_of_cars; i++){
-            string details = car_list[i];
+        for(int i = 0; i < quantity; i++){
+            string details = list[i];
             int column = 0;
             string y = "";
 
@@ -204,22 +201,22 @@ class cars : public vehicles{
             
             if(y != "" && stoi(y) == year){
                 found = true;
-                cout<< car_list[i] << endl << "------------------------------------------------------------\n";
+                cout<< list[i] << endl << "------------------------------------------------------------\n";
             }
         }
         if(!found){
-            cout<<"\nThere is no car with that model name in our inventory";
+            cout<<"\nThere is no car with that model name in our inventory\n";
         }
     }
 
-    //Function to display car in terminal within a certain price range
+    //Function to display vehicle in terminal within a certain price range
     void display_within_price_range(int min, int max){
         bool found = false;
         cout<<"\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
         cout<<"\nMake|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
 
-        for(int i = 0; i < number_of_cars; i++){
-            string details = car_list[i];
+        for(int i = 0; i < quantity; i++){
+            string details = list[i];
             int column = 0;
             string value = "";
 
@@ -235,67 +232,67 @@ class cars : public vehicles{
             
             if(value != "" && stoi(value) <= max && stoi(value) >= min){
                 found = true;
-                cout<< car_list[i] << endl << "------------------------------------------------------------\n";
+                cout<< list[i] << endl << "------------------------------------------------------------\n";
             }
         }
         if(!found){
-            cout<<"\nThere is no car within that price range in our inventory";
+            cout<<"\nThere is no car within that price range in our inventory\n";
         }
     }
 
-    //Function to remove a car from car_list vector and the .txt file
-    void remove_car(string number_plate){
-        int index = search_car(number_plate);
+    //Function to remove a vehicle from list vector and the .txt file
+    void remove_vehicle(string number_plate){
+        int index = search_vehicle(number_plate);
 
         string line;
         ifstream fin;
     
-        fin.open(path);
+        fin.open(c_path);
         ofstream temp;
         temp.open("temp.txt");
 
         while(getline(fin, line)){
-            if (line != car_list[index]){
+            if (line != list[index]){
                 temp << line << endl;
-            }    
+            }
         }
 
         temp.close();
         fin.close();
 
-        const char * p = path.c_str();
+        const char * p = c_path.c_str();
         remove(p);
         rename("temp.txt", p);
 
         if(index != -1){
-            car_list.erase(car_list.begin() + index);
-            number_of_cars -= 1;
+            list.erase(list.begin() + index);
+            quantity -= 1;
         } else{
             cout<<"There is no car by that number plate\n";
         }
     }
 
-    //Function to display all cars in inventory
-    void display_all_cars(){
+    //Function to display all vehicles (bike and cars seperate) in inventory
+    void display_all_vehicles(){
         cout<<"\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
         cout<< "\nMake|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
-        for(int i = 0; i < number_of_cars; i++){
-            cout<<car_list[i] << endl << "------------------------------------------------------------\n";
+        for(int i = 0; i < quantity; i++){
+            cout<<list[i] << endl << "------------------------------------------------------------\n";
         }
     }
 
-    //Function to display the total number of cars in inventory
-    void display_total_number_of_cars(){
-        cout<<"The total number of cars in our inventory are " << number_of_cars << endl;
+    //Function to display the total number of vehicles (bikes and cars seperate) in inventory
+    void display_total_number_of_vehicles(){
+        cout<<"The total number of cars in our inventory are " << quantity << endl;
     }
 
-    //Function for editing a car's details in car_list vector and .txt file
+    //Function for editing a vehicle's details in list vector and .txt file
     void edit_car_details(string plate){
-        int index = search_car(plate);
+        int index = search_vehicle(plate);
 
         if(index != -1){
             string edited = "", temp;
-            cout<<"Before edit: " << car_list[index] << endl;
+            cout<<"Before edit: " << list[index] << endl;
             cout<<"Enter make: ";
             cin>> temp;
             edited += temp;
@@ -320,29 +317,60 @@ class cars : public vehicles{
             cout<<"Enter price: ";
             cin>> temp;
             edited = edited + " " + temp;
-            car_list[index] = edited;
+            list[index] = edited;
 
-            ofstream file(path);
-            for(int i = 0; i < number_of_cars; i++){
-                file<< car_list[i] + "\n";
+            ofstream file(c_path);
+            for(int i = 0; i < quantity; i++){
+                file<< list[i] + "\n";
             }
         } else{
-            cout<<"There is no car by that plate in our inventory";
+            cout<<"There is no vehicle by that plate in our inventory\n";
         }
     }
 };
 
-class bikes : public vehicles{
+class cars : public vehicles{
+    ifstream file;
+    int number_of_cars;
+    vector<string> car_list;
 
+    public:
+    cars() : file(c_path), number_of_cars(0) {}
+
+    //Function for reading file and setting values from parent class function
+    void read(){
+        read_file(c_path);
+        car_list = list;
+        number_of_cars = quantity;
+    }
+};
+
+class bikes : public vehicles{
+    ifstream file;
+    int number_of_bikes;
+    vector<string> bikes_list;
+
+    public:
+    bikes() : file(b_path), number_of_bikes(0) {}
+
+    //Function for reading file and setting values from parent class function
+    void read(){
+        read_file(b_path);
+        bikes_list = list;
+        number_of_bikes = quantity;
+    }
 };
 
 /*
 int main(){
     //testing
     cars a;
-    a.read_file();
+    bikes b;
 
-    //a.display_car("BYX-365");
+    a.read();
+    b.read();
+
+    //a.display_vehicle("BYX-365");
 
     //a.remove_car("BYX-365");
 
@@ -358,7 +386,7 @@ int main(){
 
     //a.display_by_year(2021);
 
-    //a.add_car("Lamborghini", "Aventador", "SVJ", 2022, "X-88-X", "6500cc", "5km/l", 400000000);
+    //a.add_vehicle("Lamborghini", "Aventador", "SVJ", 2022, "X-88-X", "6500cc", "5km/l", 400000000);
 
     //a.remove_car("X-88-X");
 
@@ -373,5 +401,9 @@ int main(){
     //a.display_all_cars();
 
     //a.display_car("AWL-241");
+
+    //b.display_vehicle("HAT-4269");
+
+    //b.add_vehicle("Honda", "CG-125", "SE", 2024, "IAT-1948", "125cc", "50km/l", 100000);
 }
 */
