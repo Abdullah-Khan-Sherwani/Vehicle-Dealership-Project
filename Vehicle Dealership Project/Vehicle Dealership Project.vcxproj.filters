@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="AccountSource1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Accounts14,3.h.cpp">
@@ -26,6 +26,21 @@
     </ClCompile>
     <ClCompile Include="inventory.h.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vehicle_file.h.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Accounts-T.h.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="customers-employees.h.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountSource-T.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

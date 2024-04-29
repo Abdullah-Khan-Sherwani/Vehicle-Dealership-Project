@@ -79,12 +79,46 @@ public:
 
 		for (Account* account : accounts) {
             Employee* emp = dynamic_cast<Employee*>(account);
-			if (emp && emp->employeeID == employeeID && emp->password == password) {
-            cout << "\nLogin successful!\n";
-            return emp;
-		}
-		cout << "\nIncorrect Details!\n";
-		return nullptr;
+            if (emp && emp->employeeID == employeeID && emp->password == password) {
+                cout << "\nLogin successful!\n";
+                return emp;
+            }
+            else if (emp && emp->employeeID == employeeID && emp->password != password) {
+                cout << "\nIncorrect Details!\n";
+                cout << "Forgot password? Enter 1 to change password or 0 to try again\n";
+
+                int choice;
+                switch (choice)
+                {
+                case 1: {
+                    while (true) {
+                        cout << "Enter new password: ";
+                        string newpass;
+                        cin >> newpass;
+                        cout << "Enter new password again: ";
+                        string newpass2;
+                        cin >> newpass2;
+
+                        if (newpass != newpass2) {
+                            cout << "Passwords do not match, try again:\n";
+                        }
+                        else {
+                            emp->password = newpass;
+                            login(accounts);
+                            break;
+                        }
+                    }
+                }
+                case 0: {
+                    login(accounts);
+                }
+                default:
+                    break;
+                }
+            }
+            else {
+                return nullptr;
+            }
 	}
     }
 };
@@ -155,11 +189,45 @@ public:
 		for (Account* account : accounts) {
             Customer* cust = dynamic_cast<Customer*>(account);
 			if (cust && cust->mail == mail && cust->password == password) {
-            cout << "\nLogin successful!\n";
-            return cust;
-		}
-		cout << "\nIncorrect Details!\n";
-		return nullptr;
-	}
-}
+                cout << "\nLogin successful!\n";
+                return cust;
+		    }
+            else if (cust && cust->mail == mail){
+                cout << "\nIncorrect Details!\n";
+                cout << "Forgot password? Enter 1 to change password or 0 to try again\n";
+                
+                int choice;
+                switch (choice)
+                {
+                case 1: {
+                    while (true) {
+                        cout << "Enter new password: ";
+                        string newpass;
+                        cin >> newpass;
+                        cout << "Enter new password again: ";
+                        string newpass2;
+                        cin >> newpass2;
+
+                        if (newpass != newpass2) {
+                            cout << "Passwords do not match, try again:\n";
+                        }
+                        else {
+                            cust->password = newpass;
+                            login(accounts);
+                            break;
+                        }
+                    }
+                }
+                case 0: {
+                    login(accounts);
+                }
+                default:
+                    break;
+                }
+            }
+            else {
+                return nullptr;
+            }
+	    }
+      }
 };

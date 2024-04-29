@@ -127,10 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Accounts-T.h.cpp" />
     <ClCompile Include="Accounts14,3.h.cpp" />
+    <ClCompile Include="customers-employees.h.cpp" />
     <ClCompile Include="inventory.h.cpp" />
+    <ClCompile Include="AccountSource1.cpp" />
+    <ClCompile Include="AccountSource-T.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="tools.h.cpp" />
+    <ClCompile Include="vehicle_file.h.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
