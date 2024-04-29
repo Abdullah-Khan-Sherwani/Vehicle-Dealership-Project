@@ -1,5 +1,5 @@
 Honda CD70 4-stroke 2006 HAT-4269 70cc 70km/l 40000
-Harley_Davidson Fat-Boy Cruiser 2015 IAT-1947 1900cc 10km/l 8900000
+Harley-Davidson Fat-Boy Cruiser 2015 IAT-1947 1900cc 10km/l 8900000
 Honda CG-125 SE 2024 IAT-1948 125cc 50km/l 100000
 Yamaha YZF-R1 Superbike 2018 UOT-2853 1000cc 15km/l 1500000
 Suzuki GSX-R750 Sportbike 2023 RAT-3920 750cc 20km/l 800000
@@ -12,7 +12,7 @@ Suzuki Hayabusa Hyperbike 2017 RAT-5183 1300cc 12km/l 1800000
 Yamaha MT-07 Bike 2023 UAT-8245 700cc 20km/l 600000
 Kawasaki Z900RS Retro 2022 KIT-6150 900cc 25km/l 850000
 Honda CB650R Streetfighter 2021 HAT-8201 650cc 22km/l 750000
-Harley_Davidson Iron 883 2019 IAT-9247 883cc 18km/l 1200000
+Harley-Davidson Iron 883 2019 IAT-9247 883cc 18km/l 1200000
 BMW R1250GS Adventure 2023 BIT-4821 1250cc 25km/l 3000000
 Yamaha FZ-09 Naked 2020 UAT-7382 900cc 18km/l 700000
 Suzuki V-Strom 650 2021 RAT-9032 650cc 30km/l 900000
@@ -22,7 +22,7 @@ Ducati Monster 821 2018 DIT-7420 821cc 14km/l 1500000
 Yamaha R3 Sportbike 2020 UAT-6198 320cc 30km/l 550000
 Triumph Bonneville T120 2023 TIT-4923 1200cc 20km/l 1100000
 Suzuki Boulevard M109R 2019 RAT-8225 1800cc 12km/l 1600000
-Harley_Davidson Road King 2022 IAT-5201 1750cc 13km/l 1800000
+Harley-Davidson Road King 2022 IAT-5201 1750cc 13km/l 1800000
 BMW G310GS Adventure 2021 BIT-2109 310cc 35km/l 500000
 Honda Rebel 500 2024 HAT-8342 500cc 30km/l 600000
 Kawasaki Versys 1000 2020 KIT-3927 1000cc 22km/l 1200000
@@ -33,14 +33,14 @@ Ducati Multistrada 950 2023 DIT-6281 950cc 20km/l 1800000
 Honda CBR500R Sportbike 2020 HAT-9375 500cc 25km/l 700000
 Yamaha XT250 Sport 2019 UAT-4826 250cc 30km/l 400000
 Kawasaki Ninja H2R 2019 KIT-9473 998cc 10km/l 20000000
-Harley_Davidson Electra Glide 2021 IAT-7384 1750cc 12km/l 2400000
+Harley-Davidson Electra Glide 2021 IAT-7384 1750cc 12km/l 2400000
 Triumph Tiger 900 2022 TIT-6349 900cc 22km/l 1500000
 Suzuki Intruder 150 2023 RAT-9208 150cc 45km/l 450000
 Honda CB300R Streetfighter 2020 HAT-5289 300cc 28km/l 500000
 Yamaha XSR900 Retro 2019 UAT-3928 900cc 20km/l 800000
 BMW F900R Sport 2022 BIT-3198 900cc 25km/l 1300000
 Ducati Streetfighter V4 2023 DIT-8392 1100cc 15km/l 2200000
-Harley_Davidson Low-Rider S 2021 IAT-4291 1868cc 15km/l 1900000
+Harley-Davidson Low-Rider S 2021 IAT-4291 1868cc 15km/l 1900000
 Kawasaki Z400 Sport 2020 KIT-2940 399cc 30km/l 400000
 Honda Africa Twin 2023 HAT-6209 1100cc 20km/l 1800000
 Suzuki GSX250R Sportbike 2021 RAT-5301 250cc 35km/l 450000
