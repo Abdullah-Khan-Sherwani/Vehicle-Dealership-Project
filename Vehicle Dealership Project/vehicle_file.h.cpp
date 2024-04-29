@@ -100,9 +100,6 @@ class vehicles : public inventory{
                 break;
             }
         }
-        if(!found){
-            return -1;
-        }
         return -1;
     }
 
@@ -113,6 +110,8 @@ class vehicles : public inventory{
             cout<<"\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
             cout<< "\nMake|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
             cout<< list[index] << endl << "------------------------------------------------------------\n";
+        } else{
+            cout<<"\nThere is no car by that number plate in our inventory\n";
         }
     }
 
@@ -331,33 +330,23 @@ class vehicles : public inventory{
 
 class cars : public vehicles{
     ifstream file;
-    int number_of_cars;
-    vector<string> car_list;
 
     public:
-    cars() : file(c_path), number_of_cars(0) {}
 
     //Function for reading file and setting values from parent class function
     void read(){
         read_file(c_path);
-        car_list = list;
-        number_of_cars = quantity;
     }
 };
 
 class bikes : public vehicles{
     ifstream file;
-    int number_of_bikes;
-    vector<string> bikes_list;
 
     public:
-    bikes() : file(b_path), number_of_bikes(0) {}
 
     //Function for reading file and setting values from parent class function
     void read(){
         read_file(b_path);
-        bikes_list = list;
-        number_of_bikes = quantity;
     }
 };
 
@@ -405,5 +394,9 @@ int main(){
     //b.display_vehicle("HAT-4269");
 
     //b.add_vehicle("Honda", "CG-125", "SE", 2024, "IAT-1948", "125cc", "50km/l", 100000);
+
+    //b.display_total_number_of_vehicles();
+
+    //b.display_vehicle("IAT-1947");
 }
 */
