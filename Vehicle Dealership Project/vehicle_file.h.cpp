@@ -287,7 +287,7 @@ class vehicles : public inventory{
     }
 
     //Function for editing a vehicle's details in list vector and .txt file
-    void edit_car_details(string plate){
+    void edit_vehicle_details(string plate){
         int index = search_vehicle(plate);
 
         if(index != -1){
