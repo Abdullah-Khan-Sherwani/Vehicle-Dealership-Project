@@ -3,20 +3,14 @@
 #include<fstream>
 #include<vector>
 #include<string>
+#include "customers-employees.h.cpp"
+#include "inventory.h.cpp"
 using namespace std;
 
 string c_path = "Car_names_list.txt";
 string b_path = "Bikes_names_list.txt";
 
-class inventory{
-
-};
-
-class tool : public inventory{
-
-};
-
-class vehicles : public inventory{
+class vehicles : public Inventory{
     public:
 
     string loaded_path;

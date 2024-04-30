@@ -4,6 +4,7 @@
 #include<vector>
 #include<iomanip>
 #include "Accounts-T.h.cpp"
+#include<map>
 using namespace std;
 
 class Employee : public Account {
@@ -124,6 +125,8 @@ public:
 };
 
 class Customer : public Account {
+protected:
+    static map<string, vector<string>> logbook;
 public:
     Customer(string mail, string password, string name)
         : Account(mail, password, name) {
