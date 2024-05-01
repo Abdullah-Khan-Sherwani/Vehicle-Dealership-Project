@@ -1,13 +1,16 @@
+#ifndef VEHICLE_FILE_H_CPP
+#define VEHICLE_FILE_H_CPP
+
 #include<iostream>
 #include<ostream>
 #include<fstream>
 #include<vector>
 #include<string>
-#include"customers-employees.h.cpp"
+//#include"customers-employees.h.cpp"
 #include"inventory.h.cpp"
 using namespace std;
 
-string path = "/Users/hamza/IBA Stuff/C++/OOP/Xcode/28th_march/Project/Vehicles_names_list.txt";
+string path = "C:\\Users\\abdul\\OneDrive\\Documents\\Semester 2\\OOP\\Vehicle Dealership Project\\Vehicle Dealership Project\\Vehicles_names_list.txt";
 
 /*Only one vehicle object will be made in main since our static implementation had issues*/
 
@@ -612,3 +615,5 @@ int main(){
     //a.add_vehicle("C", "as", "as", "as", 34567, "BYX-365", "3435", "sd", 123);
 }
 */
+
+#endif // !VEHICLE_FILE_H_CPP

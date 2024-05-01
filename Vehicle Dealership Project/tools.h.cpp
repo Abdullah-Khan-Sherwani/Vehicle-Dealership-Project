@@ -1,4 +1,7 @@
-/*#include "inventory.h.cpp"
+/*#ifndef TOOL_H_CPP
+#define TOOL_H_CPP
+
+#include "inventory.h.cpp"
 extern double wallet;
 
 class Tools : public Inventory {
@@ -33,4 +36,6 @@ public:
 		cout << "Quantity: " << quantity << "\n";
 		cout << "Price: " << price << "\n";
 	}
-};*/
+};
+
+#endif // !TOOL_H_CPP*/

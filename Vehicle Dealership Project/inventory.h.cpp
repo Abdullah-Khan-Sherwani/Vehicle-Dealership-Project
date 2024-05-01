@@ -1,3 +1,6 @@
+#ifndef INVENTORY_H_CPP
+#define INVENTORY_H_CPP
+
 #include<iostream>
 using namespace std;
 
@@ -15,3 +18,5 @@ public:
 	virtual void display() = 0;
 	// Updated github
 };
+
+#endif // !INVENTORY_H_CPP

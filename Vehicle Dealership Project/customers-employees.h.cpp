@@ -1,3 +1,6 @@
+#ifndef CUSTOMERS_EMPLOYEES_H_CPP
+#define CUSTOMERS_EMPLOYEES_H_CPP
+
 #include<iostream>
 #include<cstdlib>
 #include<string>
@@ -8,6 +11,15 @@
 using namespace std;
 
 bool checkMail(vector<Account*> accounts, string mail);
+/*bool checkMail(vector<Account*> accounts, string mail) {
+    for (Account* account : accounts) {
+        if (account->mail == mail) {
+            return true;
+        }
+    }
+
+    return false;
+}*/
 
 class Employee : public Account {
 private:
@@ -280,16 +292,6 @@ public:
 };
 std::vector<Account*> Customer::customers;
 
-bool checkMail(vector<Account*> accounts, string mail) {
-    for (Account* account : accounts) {
-        if (account->mail == mail) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
 /*int main() {
     vector<Account*> accounts;
     bool flag = true;
@@ -349,3 +351,5 @@ bool checkMail(vector<Account*> accounts, string mail) {
     Customer::display();
     return 0;
 }*/
+
+#endif // !CUSTOMERS_EMPLOYEES_H_CPP
