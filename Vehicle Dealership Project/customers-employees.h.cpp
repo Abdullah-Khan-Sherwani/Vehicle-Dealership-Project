@@ -8,6 +8,7 @@
 using namespace std;
 
 bool checkMail(vector<Account*> accounts, string mail);
+
 class Employee : public Account {
 private:
     string employeeID;
@@ -44,6 +45,11 @@ public:
 
         // Here, you would normally add this object to a collection of accounts.
         cout << "Employee account created successfully.\n";
+    }
+
+    static Employee* test() {
+        Employee* emp = new Employee("1", "1", "1", "1");
+        return emp;
     }
 
 

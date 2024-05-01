@@ -1,4 +1,4 @@
-#include "inventory.h.cpp"
+/*#include "inventory.h.cpp"
 extern double wallet;
 
 class Tools : public Inventory {
@@ -14,7 +14,7 @@ public:
 			return;
 		}
 		quantity += amount;
-		/* Some code to reduce account balance when it is implemented*/
+		/* Some code to reduce account balance when it is implemented
 	}
 
 	void sell(int amount) override {
@@ -25,7 +25,7 @@ public:
 		quantity -= amount;
 		wallet += amount * price;
 		cout << "Transaction complete\n";
-		/* some code to charge the customer and increase the dealership account balance */
+		/* some code to charge the customer and increase the dealership account balance 
 	}
 
 	void display() override {
@@ -33,4 +33,4 @@ public:
 		cout << "Quantity: " << quantity << "\n";
 		cout << "Price: " << price << "\n";
 	}
-};
+};*/

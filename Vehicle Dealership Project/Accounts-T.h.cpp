@@ -1,3 +1,6 @@
+#ifndef ACCOUNTS_T_H_CPP
+#define ACCOUNTS_T_H_CPP
+
 #include<iostream>
 #include<cstdlib>
 #include<string>
@@ -105,3 +108,5 @@ virtual void signupInstance()=0; //pure virtual function for overridiing in deri
 		return nullptr;
 	}*/
 };
+
+#endif // ACCOUNTS_T_H_CPP
