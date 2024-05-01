@@ -9,6 +9,8 @@ using namespace std;
 
 string path = "/Users/hamza/IBA Stuff/C++/OOP/Xcode/28th_march/Project/Vehicles_names_list.txt";
 
+/*Only one vehicle object will be made in main since our static implementation had issues*/
+
 class inventory{
 
 };
@@ -24,6 +26,8 @@ class vehicles : public inventory{
     vector<string> cars_list;
     vector<string> bikes_list;
     vehicles() : cars_quantity(0), bikes_quantity(0) {}
+
+    //virtual void noInstance() = 0;
 
     //Function to delete empty lines in .txt file
     void DeleteEmptyLines(){

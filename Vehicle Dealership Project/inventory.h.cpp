@@ -8,6 +8,7 @@ protected:
 
 public:
 	Inventory(int quantity, double price) : quantity(quantity), price(price) {}
+	Inventory() {}
 
 	virtual void buy(int quantity) = 0;
 	virtual void sell(int quantity) = 0;
