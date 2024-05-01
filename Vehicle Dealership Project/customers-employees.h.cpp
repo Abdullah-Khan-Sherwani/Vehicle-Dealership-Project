@@ -7,6 +7,7 @@
 #include<map>
 using namespace std;
 
+bool checkMail(vector<Account*> accounts, string mail);
 class Employee : public Account {
 private:
     string employeeID;
@@ -19,31 +20,31 @@ public:
     }
 
     void signupInstance() override {
-    cout << "-----Employee Sign Up-----\n\n";
+        cout << "-----Employee Sign Up-----\n\n";
 
-    cout << "Full Name: ";
-    getline(cin, this->name);
-    cout << "Email: ";
-    cin >> this->mail;
-    cout<<"Employee ID: ";
-    cin>> employeeID;
-    cout << "Password: ";
-    cin >> this->password;
-
-    string check;
-    cout << "Re-enter Password: ";
-    cin >> check;
-    while (this->password != check) {
-        cout << "Passwords do not match. Please try again.\n";
+        cout << "Full Name: ";
+        getline(cin, this->name);
+        cout << "Email: ";
+        cin >> this->mail;
+        cout << "Employee ID: ";
+        cin >> employeeID;
         cout << "Password: ";
         cin >> this->password;
+
+        string check;
         cout << "Re-enter Password: ";
         cin >> check;
-    }
+        while (this->password != check) {
+            cout << "Passwords do not match. Please try again.\n";
+            cout << "Password: ";
+            cin >> this->password;
+            cout << "Re-enter Password: ";
+            cin >> check;
+        }
 
-    // Here, you would normally add this object to a collection of accounts.
-    cout << "Employee account created successfully.\n";
-}
+        // Here, you would normally add this object to a collection of accounts.
+        cout << "Employee account created successfully.\n";
+    }
 
 
     static Employee* signup() {
@@ -77,16 +78,16 @@ public:
     }
 
     static Employee* login() {
-		string employeeID, password;
-		system("cls");
-		cout << "-----Login-----\n";
-		//cout << "Login\n";
-		cout << "Employee ID: ";
-		cin >> employeeID;
-		cout << "Password: ";
-		cin >> password;
+        string employeeID, password;
+        system("cls");
+        cout << "-----Login-----\n";
+        //cout << "Login\n";
+        cout << "Employee ID: ";
+        cin >> employeeID;
+        cout << "Password: ";
+        cin >> password;
 
-		for (Account* account : employees) {
+        for (Account* account : employees) {
             Employee* emp = dynamic_cast<Employee*>(account);
             if (emp && emp->employeeID == employeeID && emp->password == password) {
                 cout << "\nLogin successful!\n";
@@ -99,7 +100,7 @@ public:
 
                 do {
                     cin >> choice;
-                } while (choice != 1 || choice != 0);
+                } while (choice != 1 && choice != 0);
 
                 switch (choice)
                 {
@@ -123,7 +124,7 @@ public:
                     }
                 }
                 case 0: {
-                    return login(); 
+                    return login();
                 }
                 default:
                     cout << "Incorrect choice\n";
@@ -133,11 +134,13 @@ public:
             else {
                 return nullptr;
             }
-	}
+        }
+        return nullptr;
     }
 
     friend bool checkMail(vector<Account*> accounts, string mail);
 };
+std::vector<Account*> Employee::employees;
 
 class Customer : public Account {
 protected:
@@ -203,27 +206,31 @@ public:
         return cust;
     }
 
-      static Customer* login() {
-		string mail, password;
-		system("cls");
-		cout << "-----Login-----\n";
-		//cout << "Login\n";
-		cout << "Email: ";
-		cin >> mail;
-		cout << "Password: ";
-		cin >> password;
+    static Customer* login() {
+        string mail, password;
+        system("cls");
+        cout << "-----Login-----\n";
+        //cout << "Login\n";
+        cout << "Email: ";
+        cin >> mail;
+        cout << "Password: ";
+        cin >> password;
 
-		for (Account* account : customers) {
+        for (Account* account : customers) {
             Customer* cust = dynamic_cast<Customer*>(account);
-			if (cust && cust->mail == mail && cust->password == password) {
+            if (cust && cust->mail == mail && cust->password == password) {
                 cout << "\nLogin successful!\n";
                 return cust;
-		    }
-            else if (cust && cust->mail == mail){
+            }
+            else if (cust && cust->mail == mail) {
                 cout << "\nIncorrect Details!\n";
                 cout << "Forgot password? Enter 1 to change password or 0 to try again\n";
-                
+
                 int choice;
+                do {
+                    cin >> choice;
+                } while (choice != 1 && choice != 0);
+
                 switch (choice)
                 {
                 case 1: {
@@ -255,11 +262,17 @@ public:
             else {
                 return nullptr;
             }
-	    }
-      }
-
-      friend bool checkMail(vector<Account*> accounts, string mail);
+        }
+        return nullptr;
+    }
+    friend bool checkMail(vector<Account*> accounts, string mail);
+    static void display() {
+        for (Account* acc : customers) {
+            cout << acc->mail << endl;
+        }
+    }
 };
+std::vector<Account*> Customer::customers;
 
 bool checkMail(vector<Account*> accounts, string mail) {
     for (Account* account : accounts) {
@@ -270,3 +283,63 @@ bool checkMail(vector<Account*> accounts, string mail) {
 
     return false;
 }
+
+/*int main() {
+    vector<Account*> accounts;
+    bool flag = true;
+    while (flag) {
+        system("cls");
+        cout << "Choose an option:\n";
+        cout << "1. Employee Sign Up\n";
+        cout << "2. Customer Sign Up\n";
+        cout << "3. Employee Login\n";
+        cout << "4. Customer Login\n";
+        cout << "5. Exit\n";
+
+        int choice;
+        cin >> choice;
+        cin.ignore(); // Clear the input buffer
+
+        switch (choice) {
+        case 1: {
+            Employee* emp = Employee::signup();
+            if (emp) accounts.push_back(emp);
+            break;
+        }
+        case 2: {
+            Customer* cust = Customer::signup();
+            if (cust) accounts.push_back(cust);
+            break;
+        }
+        case 3: {
+            Employee* emp = Employee::login();
+            if (emp) {
+                // Do something with logged in employee
+            }
+            break;
+        }
+        case 4: {
+            Customer* cust = Customer::login();
+            if (cust) {
+                // Do something with logged in customer
+            }
+            break;
+        }
+        case 5: {
+            cout << "Exiting program.\n";
+            flag = false;
+            break;
+            //return 0;
+        }
+        default:
+            cout << "Invalid choice. Please try again.\n";
+            break;
+        }
+
+        cout << "Press Enter to continue...";
+        cin.get(); // Wait for user to press Enter
+    }
+    cout << "\nCustomers:\n";
+    Customer::display();
+    return 0;
+}*/
