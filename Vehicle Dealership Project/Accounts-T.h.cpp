@@ -1,4 +1,4 @@
-#ifndef ACCOUNTS_T_H_CPP
+/*#ifndef ACCOUNTS_T_H_CPP
 #define ACCOUNTS_T_H_CPP
 
 #include<iostream>
@@ -23,7 +23,7 @@ public:
 
 virtual void signupInstance()=0; //pure virtual function for overridiing in derived classes
 
-	/*void setmail() {
+	void setmail() {
 		cout << "Enter Email: ";
 		cin >> mail;
 	}
@@ -106,7 +106,7 @@ virtual void signupInstance()=0; //pure virtual function for overridiing in deri
 		}
 		cout << "\nIncorrect Details!\n";
 		return nullptr;
-	}*/
+	}
 };
 
-#endif // ACCOUNTS_T_H_CPP
+#endif // ACCOUNTS_T_H_CPP*/

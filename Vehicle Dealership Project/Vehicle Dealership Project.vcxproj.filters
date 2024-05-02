@@ -24,16 +24,7 @@
     <ClCompile Include="tools.h.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="inventory.h.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="vehicle_file.h.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Accounts-T.h.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="customers-employees.h.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="AccountSource-T.cpp">
@@ -42,5 +33,16 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="customers-employees.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vehicle_file.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="customers-employees.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-#ifndef INVENTORY_H_CPP
+/*#ifndef INVENTORY_H_CPP
 #define INVENTORY_H_CPP
 
 #include<iostream>
@@ -19,4 +19,4 @@ public:
 	// Updated github
 };
 
-#endif // !INVENTORY_H_CPP
+#endif // !INVENTORY_H_CPP*/

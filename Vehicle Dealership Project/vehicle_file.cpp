@@ -6,23 +6,65 @@
 #include<fstream>
 #include<vector>
 #include<string>
-//#include"customers-employees.h.cpp"
+#include"customers-employees.h"
 #include"inventory.h.cpp"
 using namespace std;
+extern double wallet;
 
 string path = "C:\\Users\\abdul\\OneDrive\\Documents\\Semester 2\\OOP\\Vehicle Dealership Project\\Vehicle Dealership Project\\Vehicles_names_list.txt";
 
 /*Only one vehicle object will be made in main since our static implementation had issues*/
 
-class inventory{
+class Inventory {
+protected:
+    int quantity;
+    double price;
 
+public:
+    Inventory(int quantity, double price) : quantity(quantity), price(price) {}
+    Inventory() {}
+
+    /*virtual void buy(int quantity) = 0;
+    virtual void sell(int quantity) = 0;
+    virtual void display() = 0;
+    // Updated github*/
 };
 
-class tool : public inventory{
+class Tools : public Inventory {
+protected:
+    string toolName;
 
+public:
+    Tools(string toolName, int quantity, double price) : Inventory(quantity, price), toolName(toolName) {}
+
+    /*void buy(int amount) override {
+        if (amount * price > (wallet)) {
+            cout << "Insufficient balance!\n";
+            return;
+        }
+        quantity += amount;
+        // Some code to reduce account balance when it is implemented
+    }
+
+    void sell(int amount) override {
+        if (amount >= quantity) {
+            cout << "Insufficient tools.\n";
+            return;
+        }
+        quantity -= amount;
+        wallet += amount * price;
+        cout << "Transaction complete\n";
+        // some code to charge the customer and increase the dealership account balance
+    }
+
+    void display() override {
+        cout << "Tool Name: " << toolName << "\n";
+        cout << "Quantity: " << quantity << "\n";
+        cout << "Price: " << price << "\n";
+    }*/
 };
 
-class vehicles : public inventory{
+class vehicles : public Inventory{
     public:
 
     int cars_quantity, bikes_quantity;

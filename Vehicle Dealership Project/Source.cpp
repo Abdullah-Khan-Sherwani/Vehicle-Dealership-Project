@@ -1,21 +1,10 @@
-#include "vehicle_file.h.cpp"
+#include "vehicle_file.cpp"
 //#include "inventory.h.cpp"
 //#include "tools.h.cpp"
 //#include "Accounts-T.h.cpp"
-#include "customers-employees.h.cpp"
+#include "customers-employees.h"
 vehicles vehicle;
 map<string, vector<string>> CompanyLog;   /*Will store information of all sales with customer mail as key. Will be used by employees only*/
-
-// utility function of customers-employees.h.cpp 
-bool checkMail(vector<Account*> accounts, string mail) {
-	for (Account* account : accounts) {
-		if (account->mail == mail) {
-			return true;
-		}
-	}
-
-	return false;
-}
 
 // General function for switch case range check
 bool isWithinRange(int number, int min, int max) {
