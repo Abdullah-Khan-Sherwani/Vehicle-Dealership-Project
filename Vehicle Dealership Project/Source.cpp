@@ -34,7 +34,7 @@ void customerMenu(Account* acc) {
 				// Switch case for displaying cars
 				cout << "1: Display all Cars\n2: Sort Cars by model\n3: Sort cars by make\n4: Sort cars by year\n5:Search Cars within price Range\n0: to exit\n";
 				int displaychoice; cin >> displaychoice;
-				while (isWithinRange(displaychoice, 0, 5)); {
+				while (isWithinRange(displaychoice, 0, 5)) {
 					cout << "Incorrect choice, enter again:\n";
 					cin >> displaychoice;
 				}
