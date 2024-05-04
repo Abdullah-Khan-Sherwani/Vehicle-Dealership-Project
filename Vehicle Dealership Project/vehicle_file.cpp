@@ -7,15 +7,579 @@
 #include<vector>
 #include<string>
 #include"customers-employees.h"
-#include"inventory.h.cpp"
+#include"vehicle.h"
 using namespace std;
 extern double wallet;
 
-string path = "C:\\Users\\abdul\\OneDrive\\Documents\\Semester 2\\OOP\\Vehicle Dealership Project\\Vehicle Dealership Project\\Vehicles_names_list.txt";
+//string path = "C:\\Users\\abdul\\OneDrive\\Documents\\Semester 2\\OOP\\Vehicle Dealership Project\\Vehicle Dealership Project\\Vehicles_names_list.txt";
 
 /*Only one vehicle object will be made in main since our static implementation had issues*/
 
-class Inventory {
+extern double wallet;
+string path = "C:\\Users\\abdul\\OneDrive\\Documents\\Semester 2\\OOP\\Vehicle Dealership Project\\Vehicle Dealership Project\\Vehicles_names_list.txt";
+
+/*void Inventory::buy(int quantity) {
+    // Implementation
+}
+
+void Inventory::sell(int quantity) {
+    // Implementation
+}
+
+void Inventory::display() {
+    // Implementation
+}
+
+void Tools::buy(int amount) {
+    // Implementation
+}
+
+void Tools::sell(int amount) {
+    // Implementation
+}
+
+void Tools::display() {
+    // Implementation
+}*/
+
+void vehicles::DeleteEmptyLines() {
+    ifstream in(path);
+    string line, text;
+    while (getline(in, line)) {
+        if (!(line.empty() || line.find_first_not_of(' ') == string::npos)) {
+            text += line + "\n";
+        }
+    }
+    in.close();
+    ofstream out(path);
+    out << text;
+    out.close();
+}
+
+void vehicles::read_file() {
+    DeleteEmptyLines();
+
+    ifstream in(path);
+    string line;
+    while (getline(in, line)) {
+        if (!line.empty()) {
+            if (line.substr(0, 1) == "C") {
+                ++cars_quantity;
+            }
+            else if (line.substr(0, 1) == "B") {
+                ++bikes_quantity;
+            }
+        }
+    }
+    in.close();
+    in.open(path);
+
+    for (int i = 0; i < cars_quantity + bikes_quantity; i++) {
+        string line;
+        if (getline(in, line)) {
+            char firstCharacter = line[0];
+            if (firstCharacter == 'C') {
+                cars_list.push_back(line);
+            }
+            else if (firstCharacter == 'B') {
+                bikes_list.push_back(line);
+            }
+        }
+        else {
+            break;
+        }
+    }
+
+    in.close();
+}
+
+void vehicles::add_vehicle(string type, string make, string model, string variant, int year, string number_plate, string engine, string mileage, int price) {
+    if (search_vehicle(number_plate, type) == -1) {
+        ofstream out;
+        out.open(path, ios::app);
+        if (type == "C") {
+            cars_quantity += 1;
+        }
+        else if (type == "B") {
+            bikes_quantity += 1;
+        }
+        string new_vehicle = type + " " + make + " " + model + " " + variant + " " + to_string(year) + " " + number_plate + " " + engine + " " + mileage + " " + to_string(price);
+
+        if (type == "C") {
+            cars_list.push_back(new_vehicle);;
+        }
+        else if (type == "B") {
+            bikes_list.push_back(new_vehicle);
+        }
+        out << new_vehicle;
+        cout << "Vehicle added\n";
+    }
+    else {
+        cout << "Vehicle by that number_plate already exists";
+    }
+}
+
+int vehicles::search_vehicle(string number_plate, string type) {
+    bool found = false;
+    int temp_quantity = 0;
+
+    if (type == "C") {
+        temp_quantity = cars_quantity;
+    }
+    else if (type == "B") {
+        temp_quantity = bikes_quantity;
+    }
+
+    string details;
+    for (int i = 0; i < temp_quantity; i++) {
+        if (type == "C") {
+            details = cars_list[i];
+        }
+        else if (type == "B") {
+            details = bikes_list[i];
+        }
+        int column = 0;
+        string plate = "";
+        int k = 0;
+
+        for (int j = 0; j < details.length(); j++) {
+            string index_char = details.substr(j, 1);
+            if (index_char == " ") {
+                column += 1;
+            }
+            if (column == 5 && k != 0) {
+                plate += index_char;
+            }
+            else if (column == 5) {
+                k += 1;
+            }
+        }
+        if (plate == number_plate) {
+            found = true;
+            return i;
+            break;
+        }
+    }
+    return -1;
+}
+
+void vehicles::display_vehicle(string number_plate, string type) {
+    int index = search_vehicle(number_plate, type);
+    if (index != -1) {
+        cout << "\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
+        cout << "\nType|Make|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
+        if (type == "C") {
+            cout << cars_list[index] << endl << "------------------------------------------------------------\n";
+        }
+        else if (type == "B") {
+            cout << bikes_list[index] << endl << "------------------------------------------------------------\n";
+        }
+    }
+    else {
+        cout << "\nThere is no vehicle by that number plate in our inventory\n";
+    }
+}
+
+void vehicles::display_by_make(string make, string type) {
+    bool found = false;
+    cout << "\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
+    cout << "\nType|Make|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
+    int temp_quantity = 0;
+
+    if (type == "C") {
+        temp_quantity = cars_quantity;
+    }
+    else if (type == "B") {
+        temp_quantity = bikes_quantity;
+    }
+    string details;
+
+    for (int i = 0; i < temp_quantity; i++) {
+        if (type == "C") {
+            details = cars_list[i];
+        }
+        else if (type == "B") {
+            details = bikes_list[i];
+        }
+
+        int column = 0;
+        string company = "";
+
+        for (int j = 0; j < details.length(); j++) {
+            string index_char = details.substr(j, 1);
+            if (index_char != " " && column == 1) {
+                company += index_char;
+            }
+            if (index_char == " ") {
+                column += 1;
+            }
+        }
+        if (make == company) {
+            found = true;
+            if (type == "C") {
+                cout << cars_list[i] << endl << "------------------------------------------------------------\n";
+            }
+            else if (type == "B") {
+                cout << bikes_list[i] << endl << "------------------------------------------------------------\n";
+            }
+        }
+    }
+    if (!found) {
+        cout << "\nThere is no vehicle by that make in our inventory\n";
+    }
+}
+
+void vehicles::display_by_model(string model, string type) {
+    bool found = false;
+    cout << "\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
+    cout << "\nType|Make|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
+
+    int temp_quantity = 0;
+
+    if (type == "C") {
+        temp_quantity = cars_quantity;
+    }
+    else if (type == "B") {
+        temp_quantity = bikes_quantity;
+    }
+
+    for (int i = 0; i < temp_quantity; i++) {
+        string details;
+
+        if (type == "C") {
+            details = cars_list[i];
+        }
+        else if (type == "B") {
+            details = bikes_list[i];
+        }
+        int column = 0;
+        string name = "";
+
+        for (int j = 0; j < details.length(); j++) {
+            string index_char = details.substr(j, 1);
+            if (index_char != " " && column == 2) {
+                name += index_char;
+            }
+            if (index_char == " ") {
+                column += 1;
+            }
+        }
+
+        if (name == model) {
+            found = true;
+
+            if (type == "C") {
+                cout << cars_list[i] << endl << "------------------------------------------------------------\n";
+            }
+            else if (type == "B") {
+                cout << bikes_list[i] << endl << "------------------------------------------------------------\n";
+            }
+        }
+    }
+    if (!found) {
+        cout << "\nThere is no vehicle with that model name in our inventory\n";
+    }
+}
+
+void vehicles::display_by_year(int year, string type) {
+    bool found = false;
+    cout << "\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
+    cout << "\nType|Make|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
+
+    int temp_quantity = 0;
+
+    if (type == "C") {
+        temp_quantity = cars_quantity;
+    }
+    else if (type == "B") {
+        temp_quantity = bikes_quantity;
+    }
+
+    for (int i = 0; i < temp_quantity; i++) {
+        string details;
+        if (type == "C") {
+            details = cars_list[i];
+        }
+        else if (type == "B") {
+            details = bikes_list[i];
+        }
+        int column = 0;
+        string y = "";
+
+        for (int j = 0; j < details.length(); j++) {
+            string index_char = details.substr(j, 1);
+            if (index_char != " " && column == 4) {
+                y += index_char;
+            }
+            if (index_char == " ") {
+                column += 1;
+            }
+        }
+
+        if (y != "" && stoi(y) == year) {
+            found = true;
+            if (type == "C") {
+                cout << cars_list[i] << endl << "------------------------------------------------------------\n";
+            }
+            else if (type == "B") {
+                cout << bikes_list[i] << endl << "------------------------------------------------------------\n";
+            }
+        }
+    }
+    if (!found) {
+        cout << "\nThere is no vehicle with that model name in our inventory\n";
+    }
+}
+
+void vehicles::display_within_price_range(int min, int max, string type) {
+    bool found = false;
+    cout << "\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
+    cout << "\nType|Make|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
+
+    int temp_quantity = 0;
+
+    if (type == "C") {
+        temp_quantity = cars_quantity;
+    }
+    else if (type == "B") {
+        temp_quantity = bikes_quantity;
+    }
+
+    for (int i = 0; i < temp_quantity; i++) {
+        string details;
+        if (type == "C") {
+            details = cars_list[i];
+        }
+        else if (type == "B") {
+            details = bikes_list[i];
+        }
+
+        int column = 0;
+        string value = "";
+
+        for (int j = 0; j < details.length(); j++) {
+            string index_char = details.substr(j, 1);
+            if (index_char != " " && column == 8) {
+                value += index_char;
+            }
+            if (index_char == " ") {
+                column += 1;
+            }
+        }
+
+        if (value != "" && stoi(value) <= max && stoi(value) >= min) {
+            found = true;
+            if (type == "C") {
+                cout << cars_list[i] << endl << "------------------------------------------------------------\n";
+            }
+            else if (type == "B") {
+                cout << bikes_list[i] << endl << "------------------------------------------------------------\n";
+            }
+        }
+    }
+    if (!found) {
+        cout << "\nThere is no vehicle within that price range in our inventory\n";
+    }
+}
+
+void vehicles::remove_vehicle(string number_plate, string type) {
+    int index = search_vehicle(number_plate, type);
+
+    string line;
+    ifstream fin;
+
+    fin.open(path);
+    ofstream temp;
+    temp.open("temp.txt");
+
+    if (type == "C") {
+        while (getline(fin, line)) {
+            if (line != cars_list[index]) {
+                temp << line << endl;
+            }
+        }
+    }
+    else if (type == "B") {
+        while (getline(fin, line)) {
+            if (line != bikes_list[index]) {
+                temp << line << endl;
+            }
+        }
+    }
+
+    temp.close();
+    fin.close();
+
+    const char* p = path.c_str();
+    remove(p);
+    rename("temp.txt", p);
+
+    if (type == "C") {
+        if (index != -1) {
+            cars_list.erase(cars_list.begin() + index);
+            cars_quantity -= 1;
+            cout << "Vehicle removed\n";
+        }
+        else {
+            cout << "There is no vehicle by that number plate\n";
+        }
+    }
+    else if (type == "B") {
+        if (index != -1) {
+            bikes_list.erase(bikes_list.begin() + index);
+            bikes_quantity -= 1;
+            cout << "Vehicle removed\n";
+        }
+        else {
+            cout << "There is no vehicle by that number plate\n";
+        }
+    }
+}
+
+void vehicles::display_all_cars() {
+    cout << "\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
+    cout << "\nType|Make|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
+    for (int i = 0; i < cars_quantity; i++) {
+        cout << cars_list[i] << endl << "------------------------------------------------------------\n";
+    }
+}
+
+void vehicles::display_all_bikes() {
+    cout << "\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
+    cout << "\nType|Make|Model|Variant|Year|Number-Plate|Engine|Mileage|Price\n\n";
+    for (int i = 0; i < bikes_quantity; i++) {
+        cout << bikes_list[i] << endl << "------------------------------------------------------------\n";
+    }
+}
+
+void vehicles::display_all_vehicles() {
+    display_all_cars();
+    display_all_bikes();
+}
+
+void vehicles::display_total_number_of_cars() {
+    cout << "The total number of cars in our inventory are " << cars_quantity << endl;
+}
+
+void vehicles::display_total_number_of_bikes() {
+    cout << "The total number of bikes in our inventory are " << bikes_quantity << endl;
+}
+
+void vehicles::display_total_number_of_vehicles() {
+    cout << "The total number of vehicles in our inventory are " << cars_quantity + bikes_quantity << endl;
+}
+
+int vehicles::return_vehicle_price(string number_plate, string type) {
+    string details;
+
+    if (type == "C") {
+        details = cars_list[search_vehicle(number_plate, type)];
+    }
+    else if (type == "B") {
+        details = bikes_list[search_vehicle(number_plate, type)];
+    }
+
+    int column = 0;
+    string value = "";
+
+    for (int i = 0; i < details.length(); i++) {
+        string index_char = details.substr(i, 1);
+        if (index_char != " " && column == 8) {
+            value += index_char;
+        }
+        if (index_char == " ") {
+            column += 1;
+        }
+    }
+    return stoi(value);
+}
+
+string vehicles::return_vehicle_details(string number_plate, string type) {
+    int index = search_vehicle(number_plate, type);
+
+    if (type == "C") {
+        if (index != -1) {
+            return cars_list[index];
+        }
+        else {
+            return "Car not found";
+        }
+    }
+    else if (type == "B") {
+        if (index != -1) {
+            return bikes_list[index];
+        }
+        else {
+            return "Bike not found";
+        }
+    }
+    return "Not found";
+}
+
+void vehicles::edit_vehicle_details(string plate, string type) {
+    int index = search_vehicle(plate, type);
+
+    if (index != -1) {
+        string edited = "", temp;
+        if (type == "C") {
+            cout << "Before edit: " << cars_list[index] << endl;
+        }
+        else if (type == "B") {
+            cout << "Before edit: " << bikes_list[index] << endl;
+        }
+
+        cout << "Enter type (C for car, B for bike): ";
+        cin >> temp;
+        edited += temp;
+        cout << "Enter make: ";
+        cin >> temp;
+        edited = edited + " " + temp;
+        cout << "Enter model: ";
+        cin >> temp;
+        edited = edited + " " + temp;
+        cout << "Enter variant: ";
+        cin >> temp;
+        edited = edited + " " + temp;
+        cout << "Enter year: ";
+        cin >> temp;
+        edited = edited + " " + temp;
+        cout << "Enter Number plate: ";
+        cin >> temp;
+        edited = edited + " " + temp;
+        cout << "Enter engine: ";
+        cin >> temp;
+        edited = edited + " " + temp;
+        cout << "Enter mileage: ";
+        cin >> temp;
+        edited = edited + " " + temp;
+        cout << "Enter price: ";
+        cin >> temp;
+        edited = edited + " " + temp;
+
+        if (type == "C") {
+            cars_list[index] = edited;
+        }
+        else if (type == "B") {
+            bikes_list[index] = edited;
+        }
+
+        ofstream file(path);
+        for (int i = 0; i < cars_quantity; i++) {
+            file << cars_list[i] + "\n";
+        }
+        for (int i = 0; i < bikes_quantity; i++) {
+            file << bikes_list[i] + "\n";
+        }
+
+        cout << "New details saved\n";
+    }
+    else {
+        cout << "There is no vehicle by that plate in our inventory\n";
+    }
+}
+
+
+/*class Inventory {
 protected:
     int quantity;
     double price;
@@ -24,10 +588,10 @@ public:
     Inventory(int quantity, double price) : quantity(quantity), price(price) {}
     Inventory() {}
 
-    /*virtual void buy(int quantity) = 0;
-    virtual void sell(int quantity) = 0;
-    virtual void display() = 0;
-    // Updated github*/
+    //virtual void buy(int quantity) = 0;
+    //virtual void sell(int quantity) = 0;
+    //virtual void display() = 0;
+    // Updated github
 };
 
 class Tools : public Inventory {
@@ -61,10 +625,10 @@ public:
         cout << "Tool Name: " << toolName << "\n";
         cout << "Quantity: " << quantity << "\n";
         cout << "Price: " << price << "\n";
-    }*/
-};
+    }
+};*/
 
-class vehicles : public Inventory{
+/*class vehicles : public Inventory {
     public:
 
     int cars_quantity, bikes_quantity;
@@ -594,7 +1158,7 @@ class vehicles : public Inventory{
             cout<<"There is no vehicle by that plate in our inventory\n";
         }
     }
-};
+};*/
 
 /*
 //testing

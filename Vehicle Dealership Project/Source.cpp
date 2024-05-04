@@ -1,8 +1,7 @@
-#include "vehicle_file.cpp"
-//#include "inventory.h.cpp"
-//#include "tools.h.cpp"
-//#include "Accounts-T.h.cpp"
+#include "vehicle.h"
 #include "customers-employees.h"
+using namespace std;
+
 vehicles vehicle;
 map<string, vector<string>> CompanyLog;   /*Will store information of all sales with customer mail as key. Will be used by employees only*/
 

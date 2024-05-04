@@ -44,5 +44,8 @@
     <ClInclude Include="customers-employees.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="vehicle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
