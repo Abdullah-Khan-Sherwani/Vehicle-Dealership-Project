@@ -20,6 +20,7 @@ public:
 
 public:
     virtual void signupInstance() = 0; //pure virtual function for overriding in derived classes
+    std::string get_mail();
 };
 
 // Forward declaration of checkMail function

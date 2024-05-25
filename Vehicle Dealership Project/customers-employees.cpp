@@ -25,6 +25,10 @@ Account::Account(string mail, string password, string name) : mail(mail), passwo
 // EMPLOYEE CLASS
 vector<Account*> Employee::employees;
 
+std::string Account::get_mail() {
+    return this->mail;
+}
+
 Employee::Employee(string mail, string password, string name, string employeeID) : Account(mail, password, name), employeeID(employeeID) {
     this->type = EMPLOYEE;
 }
