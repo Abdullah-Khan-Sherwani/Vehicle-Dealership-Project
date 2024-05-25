@@ -132,12 +132,14 @@
     <ClCompile Include="AccountSource1.cpp" />
     <ClCompile Include="AccountSource-T.cpp" />
     <ClCompile Include="customers-employees.cpp" />
+    <ClCompile Include="functions.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="tools.h.cpp" />
     <ClCompile Include="vehicle_file.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="customers-employees.h" />
+    <ClInclude Include="functions.h" />
     <ClInclude Include="vehicle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
