@@ -2,16 +2,16 @@
 #include "customers-employees.h"
 using namespace std;
 
-vehicles vehicle;
+vehicles vehicle; // global variable since static not implemented in vehicle class
 map<string, vector<string>> CompanyLog;   /*Will store information of all sales with customer mail as key. Will be used by employees only*/
 
-// General function for switch case range check
+// general function for switch case range check
 bool isWithinRange(int number, int min, int max) {
     return (number >= min && number <= max);
 }
 
 // Very Basic buy function
-void buy_vehicle(){
+void buy_vehicle(string type){
     int buy_choice;
     cout<<"\nWould you like to buy a vehicle? (0: Yes, 1: No)\n";
     cin>> buy_choice;
@@ -24,7 +24,8 @@ void buy_vehicle(){
     if(buy_choice == 0){
         string plate;
         cout<< "\nPlease enter the number plate of the vehicle you would like to purchase\n";
-        cin>> plate;
+        cin >> plate;
+        vehicle.remove_vehicle(plate, type);
         cout<< "\nThank you for your purchase\n\n";
     }
 }
@@ -34,6 +35,11 @@ void customerMenu(Account* acc) {
     while (choice != 0) {
         cout << "1: Car\n2: Bike\n0: Exit\n";
         int choice; cin >> choice;
+        
+        if (choice == 0) {
+            return;
+        }
+
         while (!isWithinRange(choice, 0, 2)) {
             cout << "Incorrect choice, enter again:\n";
             cin >> choice;
@@ -62,7 +68,7 @@ void customerMenu(Account* acc) {
                 case 1: {
                     vehicle.display_all_cars();
                     
-                    buy_vehicle();
+                    buy_vehicle(vehicle_type);
                     break;
                 }
                 case 2: {
@@ -70,7 +76,7 @@ void customerMenu(Account* acc) {
                     string model; cin >> model;
                     vehicle.display_by_model(model, vehicle_type);
                     
-                    buy_vehicle();
+                    buy_vehicle(vehicle_type);
                     break;
                 }
                 case 3: {
@@ -78,7 +84,7 @@ void customerMenu(Account* acc) {
                     string make; cin >> make;
                     vehicle.display_by_make(make, vehicle_type);
                     
-                    buy_vehicle();
+                    buy_vehicle(vehicle_type);
                     break;
                 }
                 case 4: {
@@ -86,7 +92,7 @@ void customerMenu(Account* acc) {
                     int year; cin >> year;
                     vehicle.display_by_year(year, vehicle_type);
                     
-                    buy_vehicle();
+                    buy_vehicle(vehicle_type);
                     break;
                 }
                 case 5: {
@@ -94,7 +100,7 @@ void customerMenu(Account* acc) {
                     float upper, lower; cin >> upper >> lower;
                     vehicle.display_within_price_range(lower, upper, vehicle_type);
                     
-                    buy_vehicle();
+                    buy_vehicle(vehicle_type);
                     break;
                 }
                 case 0: {
@@ -125,7 +131,7 @@ void customerMenu(Account* acc) {
                 case 1: {
                     vehicle.display_all_bikes();
                     
-                    buy_vehicle();
+                    buy_vehicle(vehicle_type);
                     break;
                 }
                 case 2: {
@@ -133,7 +139,7 @@ void customerMenu(Account* acc) {
                     string model; cin >> model;
                     vehicle.display_by_model(model, vehicle_type);
                     
-                    buy_vehicle();
+                    buy_vehicle(vehicle_type);
                     break;
                 }
                 case 3: {
@@ -141,7 +147,7 @@ void customerMenu(Account* acc) {
                     string make; cin >> make;
                     vehicle.display_by_make(make, vehicle_type);
                     
-                    buy_vehicle();
+                    buy_vehicle(vehicle_type);
                     break;
                 }
                 case 4: {
@@ -149,7 +155,7 @@ void customerMenu(Account* acc) {
                     int year; cin >> year;
                     vehicle.display_by_year(year, vehicle_type);
                     
-                    buy_vehicle();
+                    buy_vehicle(vehicle_type);
                     break;
                 }
                 case 5: {
@@ -157,7 +163,7 @@ void customerMenu(Account* acc) {
                     float upper, lower; cin >> upper >> lower;
                     vehicle.display_within_price_range(lower, upper, vehicle_type);
                     
-                    buy_vehicle();
+                    buy_vehicle(vehicle_type);
                     break;
                 }
                 case 0: {
@@ -175,18 +181,58 @@ int main() {
     vehicle.read_file();
 
     cout << "====== Welcome to HAT Dealership sponsored by Ibad Bhai ======\n";
-    cout << "Create an account to continue: \nEnter 1 if you are an employee and 2 if you are a customer: \n";
-    int acctype; cin >> acctype;
 
-    switch (acctype) {
-    case 1: {
-        Account* emp = Employee::test();
-        break;
+    while (true) {
+        cout << "Create an account to continue: \nEnter 1 if you are an employee and 2 if you are a customer, enter -1 to exit: \n";
+        int acctype; cin >> acctype;
+
+        if (acctype == -1) {
+            break;
+        }
+
+        if (!isWithinRange(acctype, -1, 2)) {
+            cout << "Invalid choice. Retry\n";
+            cin >> acctype;
+        }
+
+        Account* acc = nullptr;
+
+        cout << "Enter 1 to signup or 2 to login: ";
+        int action; cin >> action;
+
+        if (acctype == 1) {
+            if (action == 1) {
+                acc = Employee::signup();
+            }
+            else if (action == 2) {
+                acc = Employee::login();
+            }
+        }
+        else if (acctype == 2) {
+            if (action == 1) {
+                acc = Customer::signup();
+            }
+            else if (action == 2) {
+                acc = Customer::login();
+            }
+        }
+
+        if (acc) {
+            if (acctype == 2) {
+                customerMenu(acc);
+            }
+            else {
+                cout << "Employee logged in successfully.\n";
+                // add employee menu bois
+            }
+            //delete acc;  // memory clearance scenes //DONT DO THIS, THIS IS VERY VERY BAD
+        }
+        else {
+            cout << "Failed to login or signup.\n";
+        }
     }
-    case 2: {
-        Account* cust = Customer::signup();
-        customerMenu(cust);
-        break;
-    }
-    }
+
+
+
+    return 0;
 }

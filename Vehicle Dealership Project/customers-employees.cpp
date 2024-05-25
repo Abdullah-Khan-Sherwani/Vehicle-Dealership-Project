@@ -52,7 +52,6 @@ void Employee::signupInstance() {
         cin >> check;
     }
 
-    // Here, you would normally add this object to a collection of accounts.
     cout << "Employee account created successfully.\n";
 }
 
@@ -66,6 +65,7 @@ Employee* Employee::signup() {
     cout << "-----Employee Sign Up-----\n\n";
 
     string name, mail, password, employeeID;
+    cin.ignore();
     cout << "Full Name: "; getline(cin, name);
     cout << "Employee ID: "; getline(cin, employeeID);
     cout << "Email: "; cin >> mail;
@@ -189,6 +189,7 @@ Customer* Customer::signup() {
     cout << "-----Customer Sign Up-----\n\n";
 
     string name, mail, password;
+    cin.ignore();
     cout << "Full Name: "; getline(cin, name);
     cout << "Email: "; cin >> mail;
     if (checkMail(customers, mail)) {
