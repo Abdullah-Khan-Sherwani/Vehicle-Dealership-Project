@@ -10,6 +10,7 @@ bool isWithinRange(int number, int min, int max) {
     return (number >= min && number <= max);
 }
 
+// Very Basic buy function
 void buy_vehicle(){
     int buy_choice;
     cout<<"\nWould you like to buy a vehicle? (0: Yes, 1: No)\n";
