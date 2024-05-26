@@ -4,6 +4,7 @@
 using namespace std;
 
 vehicles vehicle; // global variable since static not implemented in vehicle class
+double saleswallet = 0; // global variable for money earned in sales can be reset
 map<string, vector<string>> CompanyLog;   /*Will store information of all sales with customer mail as key. Will be used by employees only*/
 
 int main() {

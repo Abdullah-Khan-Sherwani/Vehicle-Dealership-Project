@@ -2,6 +2,7 @@
 #include "vehicle.h"
 using namespace std;
 extern vehicles vehicle; // global variable since static not implemented in vehicle class
+extern double saleswallet = 0; // global variable for money earned in sales can be reset
 extern map<string, vector<string>> CompanyLog;   /*Will store information of all sales with customer mail as key. Will be used by employees only*/
 
 // general function for switch case range check
@@ -9,7 +10,7 @@ bool isWithinRange(int number, int min, int max) {
     return (number >= min && number <= max);
 }
 
-// Not Very Basic buy function | performs record update for sales and deletes sold cars from file
+// Not Very Basic buy function, performs record update for sales and deletes sold cars from file
 void buy_vehicle(string type, Account* acc) {
     int buy_choice;
     cout << "\nWould you like to buy a vehicle? (0: Yes, 1: No)\n";
@@ -25,10 +26,42 @@ void buy_vehicle(string type, Account* acc) {
         cout << "\nPlease enter the number plate of the vehicle you would like to purchase\n";
         cin >> plate;
         string detail = vehicle.return_vehicle_details(plate, type);
+
+        saleswallet += vehicle.return_vehicle_price(plate, type);
         CompanyLog[acc->get_mail()].push_back(detail);
         vehicle.remove_vehicle(plate, type);
         cout << "\nThank you for your purchase\n\n";
     }
+}
+
+// for employees to add/buy vehicles for the dealership
+void addV(string type) {
+    string make, model, variant, number_plate, engine, mileage;
+    int year, price;
+
+    cout << "Enter make: ";
+    cin >> make;
+    // capital first letter of company name
+    if (!make.empty()) {
+        make[0] = toupper(make[0]);
+    }
+
+    cout << "Enter model: ";
+    cin >> model;
+    cout << "Enter variant: ";
+    cin >> variant;
+    cout << "Enter year: ";
+    cin >> year;
+    cout << "Enter number plate: ";
+    cin >> number_plate;
+    cout << "Enter engine: ";
+    cin >> engine;
+    cout << "Enter mileage: ";
+    cin >> mileage;
+    cout << "Enter price: ";
+    cin >> price;
+
+    vehicle.add_vehicle(type, make, model, variant, year, number_plate, engine, mileage, price);
 }
 
 // Function for employee menu
@@ -57,10 +90,10 @@ void employeeMenu(Account* acc) {
                 string vehicle_type = "C";
 
                 // Switch case for displaying cars
-                cout << "1: Display all Cars\n2: Sort Cars by model\n3: Sort cars by make\n4: Sort cars by year\n5: Search Cars within price Range\n6: Edit Car details\n7: Remove Car \n8: Display total Cars\n9: Display total number of Vehicles\n10: Show sales\n0: to exit\n";
+                cout << "1: Display all Cars\n2: Sort Cars by model\n3: Sort cars by make\n4: Sort cars by year\n5: Search Cars within price Range\n6: Edit Car details\n7: Remove Car \n8: Display total Cars\n9: Display total number of Vehicles\n10: Show sales\n11: Add new cars\n0: to exit\n";
                 int displaychoice; cin >> displaychoice;
 
-                while (!isWithinRange(displaychoice, 0, 10)) {
+                while (!isWithinRange(displaychoice, 0, 11)) {
                     cout << "Incorrect choice, enter again:\n";
                     cin >> displaychoice;
                 }
@@ -142,6 +175,9 @@ void employeeMenu(Account* acc) {
                         cout << endl;
                     }
                 }
+                case 11: {
+                    addV(vehicle_type);
+                }
                 case 0: {
                     carflag = false;
                     break;
@@ -158,10 +194,10 @@ void employeeMenu(Account* acc) {
                 system("cls");
 
                 // Switch case for displaying cars
-                cout << "1: Display all Bikes\n2: Sort Bikes by model\n3: Sort bikes by make\n4: Sort bikes by year\n5: Search Bikes within price Range\n6: Edit Bike details\n7: Remove Bike \n8: Display total Bikes\n9: Display total number of Vehicles\n10: Total Sales\n0: to exit\n";
+                cout << "1: Display all Bikes\n2: Sort Bikes by model\n3: Sort bikes by make\n4: Sort bikes by year\n5: Search Bikes within price Range\n6: Edit Bike details\n7: Remove Bike \n8: Display total Bikes\n9: Display total number of Vehicles\n10: Total Sales\n11: Add a Bike\n0: to exit\n";
                 int displaychoice; cin >> displaychoice;
 
-                while (!isWithinRange(displaychoice, 0, 9)) {
+                while (!isWithinRange(displaychoice, 0, 11)) {
                     cout << "Incorrect choice, enter again:\n";
                     cin >> displaychoice;
                 }
@@ -247,6 +283,10 @@ void employeeMenu(Account* acc) {
                         }
                         cout << endl;
                     }
+                    cout << "Total money earned: " << saleswallet << endl;
+                }
+                case 11: {
+                    addV(vehicle_type);
                 }
                 case 0: {
                     bikeflag = false;
