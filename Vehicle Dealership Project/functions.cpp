@@ -148,8 +148,8 @@ void employeeMenu(Account* acc) {
                     displaychoice = isOk(displaychoice);
                 }
 
-                switch (displaychoice)
-                {
+                switch (displaychoice){
+                        
                 case 1: {
                     vehicle.display_all_cars();
 
@@ -227,6 +227,7 @@ void employeeMenu(Account* acc) {
                         }
                         cout << endl;
                     }
+                    break;
                 }
                 case 11: {
                     addV(vehicle_type);
@@ -236,9 +237,10 @@ void employeeMenu(Account* acc) {
                     break;
                 }
                 }
+                break;
             }
         }
-
+                
               //For bikes
         case 2: {
             bool bikeflag = true;
@@ -351,6 +353,7 @@ void employeeMenu(Account* acc) {
                     break;
                 }
                 }
+                break;
             }
         }
         }
