@@ -46,35 +46,6 @@ int isOk(int choice){
     return choice;
 }
 
-// function to check if the input data type is ok (String)
-string isOk(string choice){
-    bool ok = false;
-    if(cin.fail()){
-        ok = false;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    } else{
-        ok = true;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-    while (!ok){
-        cout<< "\nIncorrect input! Please enter again\n";
-        cin>> choice;
-        
-        if(cin.fail()){
-            ok = false;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        } else{
-            ok = true;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-    }
-    return choice;
-}
-
 // Not Very Basic buy function, performs record update for sales and deletes sold cars from file
 void buy_vehicle(string type, Account* acc) {
     int buy_choice = -1;
@@ -92,7 +63,6 @@ void buy_vehicle(string type, Account* acc) {
         string plate;
         cout << "\nPlease enter the number plate of the vehicle you would like to purchase\n";
         cin >> plate;
-        plate = isOk(plate);
         
         string detail = vehicle.return_vehicle_details(plate, type);
         
@@ -115,7 +85,6 @@ void addV(string type) {
 
     cout << "Enter make: ";
     cin >> make;
-    make = isOk(make);
     // capital first letter of company name
     if (!make.empty()) {
         make[0] = toupper(make[0]);
@@ -123,22 +92,17 @@ void addV(string type) {
 
     cout << "Enter model: ";
     cin >> model;
-    model = isOk(model);
     cout << "Enter variant: ";
     cin >> variant;
-    variant = isOk(variant);
     cout << "Enter year: ";
     cin >> year;
     year = isOk(year);
     cout << "Enter number plate: ";
     cin >> number_plate;
-    number_plate = isOk(number_plate);
     cout << "Enter engine: ";
     cin >> engine;
-    engine = isOk(engine);
     cout << "Enter mileage: ";
     cin >> mileage;
-    mileage = isOk(mileage);
     cout << "Enter price: ";
     cin >> price;
     price = isOk(price);
@@ -194,7 +158,6 @@ void employeeMenu(Account* acc) {
                 case 2: {
                     cout << "Enter Vehicle model (first letter in capital):\n";
                     string model; cin >> model;
-                    model = isOk(model);
                     vehicle.display_by_model(model, vehicle_type);
 
                     break;
@@ -202,7 +165,6 @@ void employeeMenu(Account* acc) {
                 case 3: {
                     cout << "Enter vehicle make (first letter in capital):\n";
                     string make; cin >> make;
-                    make = isOk(make);
                     vehicle.display_by_make(make, vehicle_type);
 
                     break;
@@ -228,7 +190,6 @@ void employeeMenu(Account* acc) {
                     string plate;
                     cout << "Enter vehicle number plate: \n";
                     cin >> plate;
-                    plate = isOk(plate);
                     vehicle.edit_vehicle_details(plate, vehicle_type);
 
                     break;
@@ -237,7 +198,6 @@ void employeeMenu(Account* acc) {
                     cout << "Enter vehicle number plate: \n";
                     string plate;
                     cin >> plate;
-                    plate = isOk(plate);
 
                     vehicle.remove_vehicle(plate, vehicle_type);
 
@@ -308,7 +268,6 @@ void employeeMenu(Account* acc) {
                 case 2: {
                     cout << "Enter Vehicle model (first letter in capital):\n";
                     string model; cin >> model;
-                    model = isOk(model);
                     vehicle.display_by_model(model, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -317,7 +276,6 @@ void employeeMenu(Account* acc) {
                 case 3: {
                     cout << "Enter vehicle make (first letter in capital):\n";
                     string make; cin >> make;
-                    make = isOk(make);
                     vehicle.display_by_make(make, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -346,7 +304,6 @@ void employeeMenu(Account* acc) {
                     string plate;
                     cout << "Enter vehicle number plate: \n";
                     cin >> plate;
-                    plate = isOk(plate);
                     vehicle.edit_vehicle_details(plate, vehicle_type);
 
                     break;
@@ -355,7 +312,6 @@ void employeeMenu(Account* acc) {
                     cout << "Enter vehicle number plate: \n";
                     string plate;
                     cin >> plate;
-                    plate = isOk(plate);
 
                     vehicle.remove_vehicle(plate, vehicle_type);
 
@@ -450,7 +406,6 @@ void customerMenu(Account* acc) {
                 case 2: {
                     cout << "Enter Vehicle model (first letter in capital):\n";
                     string model; cin >> model;
-                    model = isOk(model);
                     vehicle.display_by_model(model, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -459,7 +414,6 @@ void customerMenu(Account* acc) {
                 case 3: {
                     cout << "Enter vehicle make (first letter in capital):\n";
                     string make; cin >> make;
-                    make = isOk(make);
                     vehicle.display_by_make(make, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -520,7 +474,6 @@ void customerMenu(Account* acc) {
                 case 2: {
                     cout << "Enter Vehicle model (first letter in capital):\n";
                     string model; cin >> model;
-                    model = isOk(model);
                     vehicle.display_by_model(model, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -529,7 +482,6 @@ void customerMenu(Account* acc) {
                 case 3: {
                     cout << "Enter vehicle make (first letter in capital):\n";
                     string make; cin >> make;
-                    make = isOk(make);
                     vehicle.display_by_make(make, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
