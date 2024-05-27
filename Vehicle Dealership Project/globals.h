@@ -1,5 +1,6 @@
 #ifndef globals_h
 #define globals_h
+
 #include<iostream>
 #include<map>
 #include<vector>

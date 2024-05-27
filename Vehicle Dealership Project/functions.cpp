@@ -3,9 +3,9 @@
 #include "functions.h"
 #include "globals.h"
 using namespace std;
-extern vehicles vehicle; // global variable since static not implemented in vehicle class
+/*extern vehicles vehicle; // global variable since static not implemented in vehicle class
 //saleswallet = 0; // global variable for money earned in sales can be reset
-extern map<string, vector<string>> CompanyLog;   /*Will store information of all sales with customer mail as key. Will be used by employees only*/
+extern map<string, vector<string>> CompanyLog;*/   /*Will store information of all sales with customer mail as key. Will be used by employees only*/
 
 // general function for switch case range check
 bool isWithinRange(int number, int min, int max) {

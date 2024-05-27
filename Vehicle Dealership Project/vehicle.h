@@ -1,6 +1,6 @@
 //#pragma once
-#ifndef VEHICLES_H
-#define VEHICLES_H
+#ifndef VEHICLE_H
+#define VEHICLE_H
 
 #include<iostream>
 #include<ostream>
@@ -64,4 +64,4 @@ public:
     void edit_vehicle_details(string plate, string type);
 };
 
-#endif // VEHICLES_H
+#endif // VEHICLE_H
