@@ -13,6 +13,7 @@ int main() {
     while (true) {
         cout << "Create an account to continue: \nEnter 1 if you are an employee and 2 if you are a customer, enter 0 to exit: \n";
         int acctype; cin >> acctype;
+        acctype = isOk(acctype);
 
         if (acctype == 0) {
             break;
@@ -21,16 +22,19 @@ int main() {
         while (!isWithinRange(acctype, 1, 2)) {
             cout << "Invalid choice. Retry\n";
             cin >> acctype;
+            acctype = isOk(acctype);
         }
 
         Account* acc = nullptr;
 
         cout << "Enter 1 to signup or 2 to login: ";
         int action; cin >> action;
+        action = isOk(action);
 
         while (!isWithinRange(action, 1, 2)) {
             cout << "Invalid choice. Retry\n";
             cin >> action;
+            action = isOk(action);
         }
 
 
