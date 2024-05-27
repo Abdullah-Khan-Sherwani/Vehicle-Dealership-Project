@@ -454,3 +454,8 @@ void customerMenu(Account* acc) {
         }
     }
 }
+
+double update_Wallet() {
+    saleswallet = 0;
+    return saleswallet;
+}

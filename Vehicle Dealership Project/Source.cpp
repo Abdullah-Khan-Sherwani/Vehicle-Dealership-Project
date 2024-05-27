@@ -4,15 +4,6 @@
 #include "globals.h"
 using namespace std;
 
-vehicles vehicle; // global variable since static not implemented in vehicle class
-//saleswallet = 0; // global variable for money earned in sales can be reset
-map<string, vector<string>> CompanyLog;   /*Will store information of all sales with customer mail as key. Will be used by employees only*/
-
-double update_Wallet(){
-    saleswallet = 0;
-    return saleswallet;
-}
-
 int main() {
     update_Wallet();
     vehicle.read_file();
