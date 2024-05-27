@@ -19,6 +19,15 @@ bool checkMail(vector<Account*> accounts, string mail) {
     return false;
 }
 
+//function to check if password length is > 4
+string passCheck(string password){
+    while(password.length() <= 4){
+        cout<<"\nPassword length must be greater than 4\n";
+        cin>> password;
+    }
+    return password;
+}
+
 // Account class Constructor
 Account::Account(string mail, string password, string name) : mail(mail), password(password), name(name) {}
 
@@ -44,6 +53,7 @@ void Employee::signupInstance() {
     cin >> employeeID;
     cout << "Password: ";
     cin >> this->password;
+    password = passCheck(password);
 
     string check;
     cout << "Re-enter Password: ";
@@ -52,6 +62,7 @@ void Employee::signupInstance() {
         cout << "Passwords do not match. Please try again.\n";
         cout << "Password: ";
         cin >> this->password;
+        password = passCheck(password);
         cout << "Re-enter Password: ";
         cin >> check;
     }
@@ -80,12 +91,14 @@ Employee* Employee::signup() {
     }
 
     cout << "Password: "; cin >> password;
+    password = passCheck(password);
 
     string check;
     cout << "Re-enter Password: "; cin >> check;
     while (password != check) {
         cout << "Passwords do not match. Please try again.\n";
         cout << "Password: "; cin >> password;
+        password = passCheck(password);
         cout << "Re-enter Password: "; cin >> check;
     }
 
@@ -104,6 +117,7 @@ Employee* Employee::login() {
     cin >> employeeID;
     cout << "Password: ";
     cin >> password;
+    password = passCheck(password);
 
     for (Account* account : employees) {
         Employee* emp = dynamic_cast<Employee*>(account);
@@ -127,6 +141,7 @@ Employee* Employee::login() {
                     cout << "Enter new password: ";
                     string newpass;
                     cin >> newpass;
+                    newpass = passCheck(newpass);
                     cout << "Enter new password again: ";
                     string newpass2;
                     cin >> newpass2;
@@ -174,6 +189,7 @@ void Customer::signupInstance() {
     cin >> this->mail;
     cout << "Password: ";
     cin >> this->password;
+    password = passCheck(password);
 
     string check;
     cout << "Re-enter Password: ";
@@ -182,6 +198,7 @@ void Customer::signupInstance() {
         cout << "Passwords do not match. Please try again.\n";
         cout << "Password: ";
         cin >> this->password;
+        password = passCheck(password);
         cout << "Re-enter Password: ";
         cin >> check;
     }
@@ -203,12 +220,14 @@ Customer* Customer::signup() {
     }
 
     cout << "Password: "; cin >> password;
+    password = passCheck(password);
 
     string check;
     cout << "Re-enter Password: "; cin >> check;
     while (password != check) {
         cout << "Passwords do not match. Please try again.\n";
         cout << "Password: "; cin >> password;
+        password = passCheck(password);
         cout << "Re-enter Password: "; cin >> check;
     }
 
@@ -227,6 +246,7 @@ Customer* Customer::login() {
     cin >> mail;
     cout << "Password: ";
     cin >> password;
+    password = passCheck(password);
 
     for (Account* account : customers) {
         Customer* cust = dynamic_cast<Customer*>(account);
@@ -250,6 +270,7 @@ Customer* Customer::login() {
                     cout << "Enter new password: ";
                     string newpass;
                     cin >> newpass;
+                    newpass = passCheck(newpass);
                     cout << "Enter new password again: ";
                     string newpass2;
                     cin >> newpass2;
@@ -299,7 +320,7 @@ public:
 
     virtual void signupInstance() = 0; //pure virtual function for overridiing in derived classes
 
-    /*void setmail() {
+    void setmail() {
         cout << "Enter Email: ";
         cin >> mail;
     }
