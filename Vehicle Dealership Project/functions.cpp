@@ -1,13 +1,20 @@
 #include "customers-employees.h"
 #include "vehicle.h"
+#include "functions.h"
+#include "globals.h"
 using namespace std;
 extern vehicles vehicle; // global variable since static not implemented in vehicle class
-extern double saleswallet = 0; // global variable for money earned in sales can be reset
+//saleswallet = 0; // global variable for money earned in sales can be reset
 extern map<string, vector<string>> CompanyLog;   /*Will store information of all sales with customer mail as key. Will be used by employees only*/
 
 // general function for switch case range check
 bool isWithinRange(int number, int min, int max) {
     return (number >= min && number <= max);
+}
+
+double updateWallet(){
+    saleswallet = 0;
+    return saleswallet;
 }
 
 // Not Very Basic buy function, performs record update for sales and deletes sold cars from file
@@ -27,6 +34,7 @@ void buy_vehicle(string type, Account* acc) {
         cin >> plate;
         string detail = vehicle.return_vehicle_details(plate, type);
 
+        updateWallet();
         saleswallet += vehicle.return_vehicle_price(plate, type);
         CompanyLog[acc->get_mail()].push_back(detail);
         vehicle.remove_vehicle(plate, type);
