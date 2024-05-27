@@ -5,6 +5,7 @@
 #include<iomanip>
 #include<string>
 #include "customers-employees.h"
+#include "functions.h"
 #include<map>
 using namespace std;
 
@@ -80,7 +81,6 @@ Employee* Employee::signup() {
     cout << "-----Employee Sign Up-----\n\n";
 
     string name, mail, password, employeeID;
-    cin.ignore();
     cout << "Full Name: "; getline(cin, name);
     cout << "Employee ID: "; getline(cin, employeeID);
     cout << "Email: "; cin >> mail;
@@ -132,6 +132,7 @@ Employee* Employee::login() {
 
             do {
                 cin >> choice;
+                choice = isOk(choice);
             } while (choice != 1 && choice != 0);
 
             switch (choice)
@@ -261,6 +262,7 @@ Customer* Customer::login() {
             int choice;
             do {
                 cin >> choice;
+                choice = isOk(choice);
             } while (choice != 1 && choice != 0);
 
             switch (choice)
