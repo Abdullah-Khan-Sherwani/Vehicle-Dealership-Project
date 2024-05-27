@@ -4,6 +4,8 @@
 #include "globals.h"
 using namespace std;
 
+vehicles vehicle;
+
 int main() {
     update_Wallet();
     vehicle.read_file();

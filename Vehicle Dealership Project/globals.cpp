@@ -2,4 +2,4 @@
 
 double saleswallet = 0;
 map<string, vector<string>> CompanyLog;
-vehicles vehicle;
+//vehicles vehicle;
