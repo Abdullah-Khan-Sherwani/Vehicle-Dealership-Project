@@ -3,8 +3,8 @@
 #include "functions.h"
 #include "globals.h"
 using namespace std;
-extern vehicles vehicle; // global variable since static not implemented in vehicle class
-/*//saleswallet = 0; // global variable for money earned in sales can be reset
+extern vehicles vehicle; /*// global variable since static not implemented in vehicle class
+//saleswallet = 0; // global variable for money earned in sales can be reset
 extern map<string, vector<string>> CompanyLog;*/   /*Will store information of all sales with customer mail as key. Will be used by employees only*/
 
 // general function for switch case range check
@@ -17,28 +17,64 @@ double updateWallet(){
     return saleswallet;
 }
 
+// function to check if the input data type is ok (Int)
+int isOk(int choice){
+    bool ok = false;
+    if(cin.fail()){
+        ok = false;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    } else{
+        ok = true;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    while (!ok){
+        cout<< "\nIncorrect input! Please enter again\n";
+        cin>> choice;
+        
+        if(cin.fail()){
+            ok = false;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } else{
+            ok = true;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    }
+    return choice;
+}
+
 // Not Very Basic buy function, performs record update for sales and deletes sold cars from file
 void buy_vehicle(string type, Account* acc) {
-    int buy_choice;
+    int buy_choice = -1;
     cout << "\nWould you like to buy a vehicle? (0: Yes, 1: No)\n";
     cin >> buy_choice;
+    buy_choice = isOk(buy_choice);
 
     while (!isWithinRange(buy_choice, 0, 1)) {
         cout << "Incorrect choice, enter again:\n";
         cin >> buy_choice;
+        buy_choice = isOk(buy_choice);
     }
 
     if (buy_choice == 0) {
         string plate;
         cout << "\nPlease enter the number plate of the vehicle you would like to purchase\n";
         cin >> plate;
+        
         string detail = vehicle.return_vehicle_details(plate, type);
-
-        updateWallet();
-        saleswallet += vehicle.return_vehicle_price(plate, type);
-        CompanyLog[acc->get_mail()].push_back(detail);
-        vehicle.remove_vehicle(plate, type);
-        cout << "\nThank you for your purchase\n\n";
+        
+        if(detail == "Car not found" || detail == "Bike not found" || detail == "Not found"){
+            cout<<"\nVehicle not found\n";
+        } else{
+            updateWallet();
+            saleswallet += vehicle.return_vehicle_price(plate, type);
+            CompanyLog[acc->get_mail()].push_back(detail);
+            vehicle.remove_vehicle(plate, type);
+            cout << "\nThank you for your purchase\n\n";
+        }
     }
 }
 
@@ -60,6 +96,7 @@ void addV(string type) {
     cin >> variant;
     cout << "Enter year: ";
     cin >> year;
+    year = isOk(year);
     cout << "Enter number plate: ";
     cin >> number_plate;
     cout << "Enter engine: ";
@@ -68,16 +105,18 @@ void addV(string type) {
     cin >> mileage;
     cout << "Enter price: ";
     cin >> price;
+    price = isOk(price);
 
     vehicle.add_vehicle(type, make, model, variant, year, number_plate, engine, mileage, price);
 }
 
 // Function for employee menu
-void employeeMenu(Account* acc) {
+/*void employeeMenu(Account* acc) {
     int choice = -1;
     while (choice != 0) {
         cout << "1: Car\n2: Bike\n0: Exit\n";
         int choice; cin >> choice;
+        choice = isOk(choice);
 
         if (choice == 0) {
             return;
@@ -86,6 +125,7 @@ void employeeMenu(Account* acc) {
         while (!isWithinRange(choice, 0, 2)) {
             cout << "Incorrect choice, enter again:\n";
             cin >> choice;
+            choice = isOk(choice);
         }
         system("cls");
         switch (choice) {
@@ -100,14 +140,16 @@ void employeeMenu(Account* acc) {
                 // Switch case for displaying cars
                 cout << "1: Display all Cars\n2: Sort Cars by model\n3: Sort cars by make\n4: Sort cars by year\n5: Search Cars within price Range\n6: Edit Car details\n7: Remove Car \n8: Display total Cars\n9: Display total number of Vehicles\n10: Show sales\n11: Add new cars\n0: to exit\n";
                 int displaychoice; cin >> displaychoice;
+                displaychoice = isOk(displaychoice);
 
                 while (!isWithinRange(displaychoice, 0, 11)) {
                     cout << "Incorrect choice, enter again:\n";
                     cin >> displaychoice;
+                    displaychoice = isOk(displaychoice);
                 }
 
-                switch (displaychoice)
-                {
+                switch (displaychoice){
+                        
                 case 1: {
                     vehicle.display_all_cars();
 
@@ -130,6 +172,7 @@ void employeeMenu(Account* acc) {
                 case 4: {
                     cout << "Enter year to search vehicles from:\n";
                     int year; cin >> year;
+                    year = isOk(year);
                     vehicle.display_by_year(year, vehicle_type);
 
                     break;
@@ -137,6 +180,8 @@ void employeeMenu(Account* acc) {
                 case 5: {
                     cout << "Enter upper and lower price range to seacrh vehicles from:\n";
                     float upper, lower; cin >> upper >> lower;
+                    upper = isOk(upper);
+                    lower = isOk(lower);
                     vehicle.display_within_price_range(lower, upper, vehicle_type);
 
                     break;
@@ -182,6 +227,7 @@ void employeeMenu(Account* acc) {
                         }
                         cout << endl;
                     }
+                    break;
                 }
                 case 11: {
                     addV(vehicle_type);
@@ -191,9 +237,10 @@ void employeeMenu(Account* acc) {
                     break;
                 }
                 }
+                break;
             }
         }
-
+                
               //For bikes
         case 2: {
             bool bikeflag = true;
@@ -204,10 +251,12 @@ void employeeMenu(Account* acc) {
                 // Switch case for displaying cars
                 cout << "1: Display all Bikes\n2: Sort Bikes by model\n3: Sort bikes by make\n4: Sort bikes by year\n5: Search Bikes within price Range\n6: Edit Bike details\n7: Remove Bike \n8: Display total Bikes\n9: Display total number of Vehicles\n10: Total Sales\n11: Add a Bike\n0: to exit\n";
                 int displaychoice; cin >> displaychoice;
+                displaychoice = isOk(displaychoice);
 
                 while (!isWithinRange(displaychoice, 0, 11)) {
                     cout << "Incorrect choice, enter again:\n";
                     cin >> displaychoice;
+                    displaychoice = isOk(displaychoice);
                 }
 
                 switch (displaychoice)
@@ -237,6 +286,7 @@ void employeeMenu(Account* acc) {
                 case 4: {
                     cout << "Enter year to search vehicles from:\n";
                     int year; cin >> year;
+                    year = isOk(year);
                     vehicle.display_by_year(year, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -245,6 +295,8 @@ void employeeMenu(Account* acc) {
                 case 5: {
                     cout << "Enter upper and lower price range to seacrh vehicles from:\n";
                     float upper, lower; cin >> upper >> lower;
+                    upper = isOk(upper);
+                    lower = isOk(lower);
                     vehicle.display_within_price_range(lower, upper, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -301,18 +353,237 @@ void employeeMenu(Account* acc) {
                     break;
                 }
                 }
+                break;
             }
+        }
+        }
+    }
+}*/
+void employeeMenu(Account* acc) {
+    int choice = -1;
+    while (choice != 0) {
+        cout << "1: Car\n2: Bike\n0: Exit\n";
+        cin >> choice;
+        choice = isOk(choice);
+
+        while (!isWithinRange(choice, 0, 2)) {
+            cout << "Incorrect choice, enter again:\n";
+            cin >> choice;
+            choice = isOk(choice);
+        }
+
+        system("cls");
+        switch (choice) {
+            // For Cars
+        case 1: {
+            bool carflag = true;
+            while (carflag) {
+                string vehicle_type = "C";
+
+                // Switch case for displaying cars
+                cout << "1: Display all Cars\n2: Sort Cars by model\n3: Sort cars by make\n4: Sort cars by year\n5: Search Cars within price Range\n6: Edit Car details\n7: Remove Car\n8: Display total Cars\n9: Display total number of Vehicles\n10: Show sales\n11: Add new cars\n0: to exit\n";
+                int displaychoice; cin >> displaychoice;
+                displaychoice = isOk(displaychoice);
+
+                while (!isWithinRange(displaychoice, 0, 11)) {
+                    cout << "Incorrect choice, enter again:\n";
+                    cin >> displaychoice;
+                    displaychoice = isOk(displaychoice);
+                }
+
+                switch (displaychoice) {
+                case 1: {
+                    vehicle.display_all_cars();
+                    break;
+                }
+                case 2: {
+                    cout << "Enter Vehicle model (first letter in capital):\n";
+                    string model; cin >> model;
+                    vehicle.display_by_model(model, vehicle_type);
+                    break;
+                }
+                case 3: {
+                    cout << "Enter vehicle make (first letter in capital):\n";
+                    string make; cin >> make;
+                    vehicle.display_by_make(make, vehicle_type);
+                    break;
+                }
+                case 4: {
+                    cout << "Enter year to search vehicles from:\n";
+                    int year; cin >> year;
+                    year = isOk(year);
+                    vehicle.display_by_year(year, vehicle_type);
+                    break;
+                }
+                case 5: {
+                    cout << "Enter upper and lower price range to search vehicles from:\n";
+                    float upper, lower; cin >> upper >> lower;
+                    upper = isOk(upper);
+                    lower = isOk(lower);
+                    vehicle.display_within_price_range(lower, upper, vehicle_type);
+                    break;
+                }
+                case 6: {
+                    string plate;
+                    cout << "Enter vehicle number plate: \n";
+                    cin >> plate;
+                    vehicle.edit_vehicle_details(plate, vehicle_type);
+                    break;
+                }
+                case 7: {
+                    cout << "Enter vehicle number plate: \n";
+                    string plate;
+                    cin >> plate;
+                    vehicle.remove_vehicle(plate, vehicle_type);
+                    break;
+                }
+                case 8: {
+                    vehicle.display_total_number_of_cars();
+                    break;
+                }
+                case 9: {
+                    vehicle.display_total_number_of_vehicles();
+                    break;
+                }
+                case 10: {
+                    cout << "\n";
+                    if (CompanyLog.empty()) {
+                        cout << "No sales yet" << endl;
+                        break;
+                    }
+                    for (auto& user : CompanyLog) {
+                        cout << "User: " << user.first << endl;
+                        for (auto& elem : user.second) {
+                            cout << elem << "\n";
+                        }
+                        cout << endl;
+                    }
+                    break;
+                }
+                case 11: {
+                    addV(vehicle_type);
+                    break;
+                }
+                case 0: {
+                    carflag = false;
+                    break;
+                }
+                }
+            }
+            break;
+        }
+
+              // For Bikes
+        case 2: {
+            bool bikeflag = true;
+            while (bikeflag) {
+                string vehicle_type = "B";
+
+                // Switch case for displaying bikes
+                cout << "1: Display all Bikes\n2: Sort Bikes by model\n3: Sort bikes by make\n4: Sort bikes by year\n5: Search Bikes within price Range\n6: Edit Bike details\n7: Remove Bike\n8: Display total Bikes\n9: Display total number of Vehicles\n10: Total Sales\n11: Add a Bike\n0: to exit\n";
+                int displaychoice; cin >> displaychoice;
+                displaychoice = isOk(displaychoice);
+
+                while (!isWithinRange(displaychoice, 0, 11)) {
+                    cout << "Incorrect choice, enter again:\n";
+                    cin >> displaychoice;
+                    displaychoice = isOk(displaychoice);
+                }
+
+                switch (displaychoice) {
+                case 1: {
+                    vehicle.display_all_bikes();
+                    break;
+                }
+                case 2: {
+                    cout << "Enter Vehicle model (first letter in capital):\n";
+                    string model; cin >> model;
+                    vehicle.display_by_model(model, vehicle_type);
+                    break;
+                }
+                case 3: {
+                    cout << "Enter vehicle make (first letter in capital):\n";
+                    string make; cin >> make;
+                    vehicle.display_by_make(make, vehicle_type);
+                    break;
+                }
+                case 4: {
+                    cout << "Enter year to search vehicles from:\n";
+                    int year; cin >> year;
+                    year = isOk(year);
+                    vehicle.display_by_year(year, vehicle_type);
+                    break;
+                }
+                case 5: {
+                    cout << "Enter upper and lower price range to search vehicles from:\n";
+                    float upper, lower; cin >> upper >> lower;
+                    upper = isOk(upper);
+                    lower = isOk(lower);
+                    vehicle.display_within_price_range(lower, upper, vehicle_type);
+                    break;
+                }
+                case 6: {
+                    string plate;
+                    cout << "Enter vehicle number plate: \n";
+                    cin >> plate;
+                    vehicle.edit_vehicle_details(plate, vehicle_type);
+                    break;
+                }
+                case 7: {
+                    cout << "Enter vehicle number plate: \n";
+                    string plate;
+                    cin >> plate;
+                    vehicle.remove_vehicle(plate, vehicle_type);
+                    break;
+                }
+                case 8: {
+                    vehicle.display_total_number_of_bikes();
+                    break;
+                }
+                case 9: {
+                    vehicle.display_total_number_of_vehicles();
+                    break;
+                }
+                case 10: {
+                    cout << "\n";
+                    if (CompanyLog.empty()) {
+                        cout << "No sales yet" << endl;
+                        break;
+                    }
+                    for (auto& user : CompanyLog) {
+                        cout << "User: " << user.first << endl;
+                        for (auto& elem : user.second) {
+                            cout << elem << "\n";
+                        }
+                        cout << endl;
+                    }
+                    cout << "Total money earned: " << saleswallet << endl;
+                    break;
+                }
+                case 11: {
+                    addV(vehicle_type);
+                    break;
+                }
+                case 0: {
+                    bikeflag = false;
+                    break;
+                }
+                }
+            }
+            break;
         }
         }
     }
 }
 
+
 // Menu for Customers
-void customerMenu(Account* acc) {
+/*void customerMenu(Account* acc) {
     int choice = -1;
     while (choice != 0) {
         cout << "1: Car\n2: Bike\n0: Exit\n";
         int choice; cin >> choice;
+        choice = isOk(choice);
 
         if (choice == 0) {
             return;
@@ -321,6 +592,7 @@ void customerMenu(Account* acc) {
         while (!isWithinRange(choice, 0, 2)) {
             cout << "Incorrect choice, enter again:\n";
             cin >> choice;
+            choice = isOk(choice);
         }
 
         switch (choice) {
@@ -336,9 +608,11 @@ void customerMenu(Account* acc) {
                 // Switch case for displaying cars
                 cout << "1: Display all Cars\n2: Sort Cars by model\n3: Sort cars by make\n4: Sort cars by year\n5: Search Cars within price Range\n0: to exit\n";
                 int displaychoice; cin >> displaychoice;
+                displaychoice = isOk(displaychoice);
                 while (!isWithinRange(displaychoice, 0, 5)) {
                     cout << "Incorrect choice, enter again:\n";
                     cin >> displaychoice;
+                    displaychoice = isOk(displaychoice);
                 }
 
                 switch (displaychoice)
@@ -368,6 +642,7 @@ void customerMenu(Account* acc) {
                 case 4: {
                     cout << "Enter year to search vehicles from:\n";
                     int year; cin >> year;
+                    year = isOk(year);
                     vehicle.display_by_year(year, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -376,6 +651,8 @@ void customerMenu(Account* acc) {
                 case 5: {
                     cout << "Enter upper and lower price range to seacrh vehicles from:\n";
                     float upper, lower; cin >> upper >> lower;
+                    upper = isOk(upper);
+                    lower = isOk(lower);
                     vehicle.display_within_price_range(lower, upper, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -399,9 +676,11 @@ void customerMenu(Account* acc) {
                 // Switch case for displaying cars
                 cout << "1: Display all Bikes\n2: Sort Bikes by model\n3: Sort bikes by make\n4: Sort bikes by year\n5: Search Bikes within price Range\n0: to exit\n";
                 int displaychoice; cin >> displaychoice;
+                displaychoice = isOk(displaychoice);
                 while (!isWithinRange(displaychoice, 0, 5)) {
                     cout << "Incorrect choice, enter again:\n";
                     cin >> displaychoice;
+                    displaychoice = isOk(displaychoice);
                 }
 
                 switch (displaychoice)
@@ -431,6 +710,7 @@ void customerMenu(Account* acc) {
                 case 4: {
                     cout << "Enter year to search vehicles from:\n";
                     int year; cin >> year;
+                    year = isOk(year);
                     vehicle.display_by_year(year, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -439,6 +719,8 @@ void customerMenu(Account* acc) {
                 case 5: {
                     cout << "Enter upper and lower price range to seacrh vehicles from:\n";
                     float upper, lower; cin >> upper >> lower;
+                    upper = isOk(upper);
+                    lower = isOk(lower);
                     vehicle.display_within_price_range(lower, upper, vehicle_type);
 
                     buy_vehicle(vehicle_type, acc);
@@ -453,7 +735,150 @@ void customerMenu(Account* acc) {
         }
         }
     }
+}*/
+void customerMenu(Account* acc) {
+    int choice = -1;
+    while (choice != 0) {
+        cout << "1: Car\n2: Bike\n0: Exit\n";
+        cin >> choice;
+        choice = isOk(choice);
+
+        while (!isWithinRange(choice, 0, 2)) {
+            cout << "Incorrect choice, enter again:\n";
+            cin >> choice;
+            choice = isOk(choice);
+        }
+
+        switch (choice) {
+            // For Cars
+        case 1: {
+            bool carflag = true;
+            while (carflag) {
+                string vehicle_type = "C";
+                system("cls");
+
+                // Switch case for displaying cars
+                cout << "1: Display all Cars\n2: Sort Cars by model\n3: Sort cars by make\n4: Sort cars by year\n5: Search Cars within price Range\n0: to exit\n";
+                int displaychoice; cin >> displaychoice;
+                displaychoice = isOk(displaychoice);
+                while (!isWithinRange(displaychoice, 0, 5)) {
+                    cout << "Incorrect choice, enter again:\n";
+                    cin >> displaychoice;
+                    displaychoice = isOk(displaychoice);
+                }
+
+                switch (displaychoice) {
+                case 1: {
+                    vehicle.display_all_cars();
+                    buy_vehicle(vehicle_type, acc);
+                    break;
+                }
+                case 2: {
+                    cout << "Enter Vehicle model (first letter in capital):\n";
+                    string model; cin >> model;
+                    vehicle.display_by_model(model, vehicle_type);
+                    buy_vehicle(vehicle_type, acc);
+                    break;
+                }
+                case 3: {
+                    cout << "Enter vehicle make (first letter in capital):\n";
+                    string make; cin >> make;
+                    vehicle.display_by_make(make, vehicle_type);
+                    buy_vehicle(vehicle_type, acc);
+                    break;
+                }
+                case 4: {
+                    cout << "Enter year to search vehicles from:\n";
+                    int year; cin >> year;
+                    year = isOk(year);
+                    vehicle.display_by_year(year, vehicle_type);
+                    buy_vehicle(vehicle_type, acc);
+                    break;
+                }
+                case 5: {
+                    cout << "Enter upper and lower price range to search vehicles from:\n";
+                    float upper, lower; cin >> upper >> lower;
+                    upper = isOk(upper);
+                    lower = isOk(lower);
+                    vehicle.display_within_price_range(lower, upper, vehicle_type);
+                    buy_vehicle(vehicle_type, acc);
+                    break;
+                }
+                case 0: {
+                    carflag = false;
+                    break;
+                }
+                }
+            }
+            break;
+        }
+
+              // For Bikes
+        case 2: {
+            bool bikeflag = true;
+            while (bikeflag) {
+                string vehicle_type = "B";
+                system("cls");
+
+                // Switch case for displaying bikes
+                cout << "1: Display all Bikes\n2: Sort Bikes by model\n3: Sort bikes by make\n4: Sort bikes by year\n5: Search Bikes within price Range\n0: to exit\n";
+                int displaychoice; cin >> displaychoice;
+                displaychoice = isOk(displaychoice);
+                while (!isWithinRange(displaychoice, 0, 5)) {
+                    cout << "Incorrect choice, enter again:\n";
+                    cin >> displaychoice;
+                    displaychoice = isOk(displaychoice);
+                }
+
+                switch (displaychoice) {
+                case 1: {
+                    vehicle.display_all_bikes();
+                    buy_vehicle(vehicle_type, acc);
+                    break;
+                }
+                case 2: {
+                    cout << "Enter Vehicle model (first letter in capital):\n";
+                    string model; cin >> model;
+                    vehicle.display_by_model(model, vehicle_type);
+                    buy_vehicle(vehicle_type, acc);
+                    break;
+                }
+                case 3: {
+                    cout << "Enter vehicle make (first letter in capital):\n";
+                    string make; cin >> make;
+                    vehicle.display_by_make(make, vehicle_type);
+                    buy_vehicle(vehicle_type, acc);
+                    break;
+                }
+                case 4: {
+                    cout << "Enter year to search vehicles from:\n";
+                    int year; cin >> year;
+                    year = isOk(year);
+                    vehicle.display_by_year(year, vehicle_type);
+                    buy_vehicle(vehicle_type, acc);
+                    break;
+                }
+                case 5: {
+                    cout << "Enter upper and lower price range to search vehicles from:\n";
+                    float upper, lower; cin >> upper >> lower;
+                    upper = isOk(upper);
+                    lower = isOk(lower);
+                    vehicle.display_within_price_range(lower, upper, vehicle_type);
+                    buy_vehicle(vehicle_type, acc);
+                    break;
+                }
+                case 0: {
+                    bikeflag = false;
+                    break;
+                }
+                }
+            }
+            break;
+        }
+        }
+    }
 }
+
 
 double update_Wallet() {
     saleswallet = 0;
