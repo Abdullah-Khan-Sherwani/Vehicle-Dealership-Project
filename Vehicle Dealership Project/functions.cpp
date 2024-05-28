@@ -49,17 +49,17 @@ int isOk(int choice){
 // Not Very Basic buy function, performs record update for sales and deletes sold cars from file
 void buy_vehicle(string type, Account* acc) {
     int buy_choice = -1;
-    cout << "\nWould you like to buy a vehicle? (0: Yes, 1: No)\n";
+    cout << "\nWould you like to buy a vehicle? (1: Yes, 2: No)\n";
     cin >> buy_choice;
     buy_choice = isOk(buy_choice);
 
-    while (!isWithinRange(buy_choice, 0, 1)) {
+    while (!isWithinRange(buy_choice, 1, 2)) {
         cout << "Incorrect choice, enter again:\n";
         cin >> buy_choice;
         buy_choice = isOk(buy_choice);
     }
 
-    if (buy_choice == 0) {
+    if (buy_choice == 1) {
         string plate;
         cout << "\nPlease enter the number plate of the vehicle you would like to purchase\n";
         cin >> plate;
@@ -416,10 +416,12 @@ void employeeMenu(Account* acc) {
                     break;
                 }
                 case 5: {
-                    cout << "Enter upper and lower price range to search vehicles from:\n";
-                    float upper, lower; cin >> upper >> lower;
+                    float upper, lower;
+                    cout<< "Enter upper range of price:\n";
+                    cin >> upper;
                     upper = isOk(upper);
-                    lower = isOk(lower);
+                    cout<< "Enter lower range of price:\n";
+                    cin >> lower;
                     vehicle.display_within_price_range(lower, upper, vehicle_type);
                     break;
                 }
@@ -515,10 +517,12 @@ void employeeMenu(Account* acc) {
                     break;
                 }
                 case 5: {
-                    cout << "Enter upper and lower price range to search vehicles from:\n";
-                    float upper, lower; cin >> upper >> lower;
+                    float upper, lower;
+                    cout<< "Enter upper range of price:\n";
+                    cin >> upper;
                     upper = isOk(upper);
-                    lower = isOk(lower);
+                    cout<< "Enter lower range of price:\n";
+                    cin >> lower;
                     vehicle.display_within_price_range(lower, upper, vehicle_type);
                     break;
                 }
@@ -796,9 +800,12 @@ void customerMenu(Account* acc) {
                     break;
                 }
                 case 5: {
-                    cout << "Enter upper and lower price range to search vehicles from:\n";
-                    float upper, lower; cin >> upper >> lower;
+                    float upper, lower;
+                    cout<< "Enter upper range of price:\n";
+                    cin >> upper;
                     upper = isOk(upper);
+                    cout<< "Enter lower range of price:\n";
+                    cin >> lower;
                     lower = isOk(lower);
                     vehicle.display_within_price_range(lower, upper, vehicle_type);
                     buy_vehicle(vehicle_type, acc);
@@ -859,10 +866,12 @@ void customerMenu(Account* acc) {
                     break;
                 }
                 case 5: {
-                    cout << "Enter upper and lower price range to search vehicles from:\n";
-                    float upper, lower; cin >> upper >> lower;
+                    float upper, lower;
+                    cout<< "Enter upper range of price:\n";
+                    cin >> upper;
                     upper = isOk(upper);
-                    lower = isOk(lower);
+                    cout<< "Enter lower range of price:\n";
+                    cin >> lower;
                     vehicle.display_within_price_range(lower, upper, vehicle_type);
                     buy_vehicle(vehicle_type, acc);
                     break;
