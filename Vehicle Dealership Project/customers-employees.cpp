@@ -231,7 +231,7 @@ Customer* Customer::signup() {
     cout << "-----Customer Sign Up-----\n\n";
 
     string name, mail, password;
-    cout << "Press enter to continue";
+    //cout << "Press enter to continue";
     //cin.ignore();
     //cin.get();
     cout << "Full Name: "; getline(cin, name);
