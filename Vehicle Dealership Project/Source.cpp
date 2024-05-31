@@ -7,7 +7,7 @@ using namespace std;
 vehicles vehicle;
 
 int main() {
-    update_Wallet();
+    //update_Wallet();
     vehicle.read_file();
 
     cout << "====== Welcome to HAT Dealership sponsored by Ibad Bhai ======\n";
