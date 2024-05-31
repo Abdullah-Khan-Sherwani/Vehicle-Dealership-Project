@@ -11,12 +11,12 @@ extern map<string, vector<string>> CompanyLog;*/   /*Will store information of a
 bool isWithinRange(int number, int min, int max) {
     return (number >= min && number <= max);
 }
-
+/*
 double updateWallet(){
     saleswallet = 0;
     return saleswallet;
 }
-
+*/
 // function to check if the input data type is ok (Int)
 int isOk(int choice){
     bool ok = false;
@@ -69,7 +69,7 @@ void buy_vehicle(string type, Account* acc) {
         if(detail == "Car not found" || detail == "Bike not found" || detail == "Not found"){
             cout<<"\nVehicle not found\n";
         } else{
-            updateWallet();
+            //updateWallet();
             saleswallet += vehicle.return_vehicle_price(plate, type);
             CompanyLog[acc->get_mail()].push_back(detail);
             vehicle.remove_vehicle(plate, type);
@@ -888,8 +888,9 @@ void customerMenu(Account* acc) {
     }
 }
 
-
+/*
 double update_Wallet() {
     saleswallet = 0;
     return saleswallet;
 }
+*/
